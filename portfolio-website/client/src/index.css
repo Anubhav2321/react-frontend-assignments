@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00f2fe;
+  --color-secondary: #4facfe;
+  --color-accent: #8b5cf6;
+  --color-dark: #0a0a0a;
+  --color-darker: #050505;
+  --color-light: #ffffff;
+  --font-sans: 'Outfit', sans-serif;
+  --shadow-neon: 0 0 20px rgba(0, 242, 254, 0.4), 0 0 40px rgba(0, 242, 254, 0.1);
+  --shadow-neon-accent: 0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.1);
+}
+
+@layer base {
+  body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html.dark body {
+    background-color: #050505;
+    background-image: radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.03), transparent 25%),
+                      radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.03), transparent 25%);
+  }
+
+  html:not(.dark) body {
+    background-color: #f0f4f8; 
+    background-image: radial-gradient(circle at 15% 50%, rgba(0, 242, 254, 0.08), transparent 25%),
+                      radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+  }
+}
+
+@layer utilities {
+  /* Optimized Glassmorphism */
+  html.dark .glass {
+    background: rgba(10, 10, 10, 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  html:not(.dark) .glass {
+    background: rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 100, 255, 0.1);
+  }
+
+  .text-gradient {
+    background: linear-gradient(to right, #00f2fe, #4facfe, #8b5cf6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+}
+
+/* HERO IMAGE CUSTOM CSS */
+.hero-img-custom {
+    filter: grayscale(0%) drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+    transition: transform 0.4s ease-out, filter 0.4s ease-out;
+    will-change: transform;
+}
+html.dark .hero-img-custom {
+    filter: grayscale(0%) drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+}
+.hero-img-custom:hover {
+    transform: scale(1.02) translateY(-5px);
+    filter: grayscale(0%) drop-shadow(0 15px 30px rgba(0,242,254,0.3));
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+/* Preloader Animation */
+.glitch-text { animation: glitch 1.5s linear infinite; }
+@keyframes glitch {
+    2%, 64% { transform: translate(2px,0) skew(0deg); }
+    4%, 60% { transform: translate(-2px,0) skew(0deg); }
+    62% { transform: translate(0,0) skew(5deg); }
+}
+
+/* PERFORMANCE FIX: Added will-change for smooth mobile stars */
+.star {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: float-star linear infinite;
+}
+html.dark .star { background-color: rgba(255, 255, 255, 0.4); }
+html:not(.dark) .star { background-color: rgba(0, 242, 254, 0.3); }
+@keyframes float-star {
+    0% { opacity: 0; transform: translateY(0); }
+    10% { opacity: 0.3; } 
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-100vh); }
+}
+
+.hero-img-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+html.dark ::-webkit-scrollbar-thumb { background: #333; }
+::-webkit-scrollbar-thumb:hover { background: #00f2fe; }
+
+.nav-link.active { color: #00f2fe; position: relative; }
+.nav-link.active::after {
+    content: '';
+    position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 2px; background-color: #00f2fe; border-radius: 2px;
+    box-shadow: 0 0 8px rgba(0, 242, 254, 0.8);
+}
+
+/* Custom animation durations */
+.anim-dur-4s { animation-duration: 4s; }
+.anim-dur-5s { animation-duration: 5s; }
+.anim-dur-6s { animation-duration: 6s; }
+.anim-dur-7s { animation-duration: 7s; }

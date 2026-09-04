@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Anubhav Samanta",
+    "employeeId": "EMP001",
+    "department": "Manager",
+    "gender": "Male",
+    "phone": "9876543210",
+    "localAddress": "New Town, Kolkata",
+    "permanentAddress": "Tamluk, West Bengal"
+  },
+  {
+    "id": 2,
+    "name": "Abhishek Chowdhoury",
+    "employeeId": "EMP002",
+    "department": "Marketing",
+    "gender": "male",
+    "phone": "9123456780",
+    "localAddress": "Salt Lake, Kolkata",
+    "permanentAddress": "Haldia, West Bengal"
+  },
+  {
+    "id": 3,
+    "name": "Avik Kulavi",
+    "employeeId": "EMP003",
+    "department": "System Admin",
+    "gender": "Male",
+    "phone": "9001234567",
+    "localAddress": "Rajarhat, Kolkata",
+    "permanentAddress": "Digha, West Bengal"
+  },
+  {
+    "id": 4,
+    "name": "Soham Shyamal ",
+    "employeeId": "EMP004",
+    "department": "HR",
+    "gender": "Male",
+    "phone": "9876543210",
+    "localAddress": "Rajarhat, Kolkata",
+    "permanentAddress": "Digha, West Bengal"
+  }
+]
