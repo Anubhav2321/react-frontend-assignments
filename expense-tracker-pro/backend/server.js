@@ -12,6 +12,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Base route for testing (Fixes 'Cannot GET /' error)
+app.get('/', (req, res) => {
+  res.send('Expense Tracker API is running smoothly.');
+});
+
 // Routes
 app.use('/api/transactions', transactionRoutes);
 
@@ -31,6 +36,6 @@ export default app;
 
 /* 
 // Local machine-e test korar shomoy nicher line gulo uncomment kore nite paro
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 */
