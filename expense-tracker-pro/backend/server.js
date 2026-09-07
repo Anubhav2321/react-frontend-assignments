@@ -15,16 +15,22 @@ app.use(express.json());
 // Routes
 app.use('/api/transactions', transactionRoutes);
 
-const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
 // Connect to MongoDB
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('MongoDB Connected');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {
     console.error('Database connection failed', err);
-    process.exit(1);
   });
+
+// Vercel Serverless Function er jonno app export kora hocche
+export default app;
+
+/* 
+// Local machine-e test korar shomoy nicher line gulo uncomment kore nite paro
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+*/
