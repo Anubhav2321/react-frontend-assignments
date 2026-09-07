@@ -1,0 +1,132 @@
+.task-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  padding: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Neon Borders Based on Priority */
+.task-card.priority-high {
+  border-left: 4px solid var(--neon-pink);
+}
+.task-card.priority-high:hover {
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.2), inset 0 0 10px rgba(255, 0, 60, 0.05);
+  border-color: var(--neon-pink);
+}
+.priority-high-text { color: var(--neon-pink); }
+
+.task-card.priority-medium {
+  border-left: 4px solid var(--neon-yellow);
+}
+.task-card.priority-medium:hover {
+  box-shadow: 0 0 15px rgba(252, 238, 10, 0.2), inset 0 0 10px rgba(252, 238, 10, 0.05);
+  border-color: var(--neon-yellow);
+}
+.priority-medium-text { color: var(--neon-yellow); }
+
+.task-card.priority-low {
+  border-left: 4px solid var(--neon-cyan);
+}
+.task-card.priority-low:hover {
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.05);
+  border-color: var(--neon-cyan);
+}
+.priority-low-text { color: var(--neon-cyan); }
+
+/* Completed State */
+.task-card.completed-card {
+  border-left-color: var(--neon-green);
+  opacity: 0.7;
+}
+.task-card.completed-card:hover {
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+  border-color: var(--neon-green);
+}
+
+.task-card-content {
+  cursor: pointer;
+}
+
+.task-title {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.task-title.strike-through {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-card-content:hover .task-title {
+  color: var(--neon-cyan);
+}
+
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  gap: 5px;
+}
+
+.task-card-actions {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid var(--border-dim);
+  padding-top: 15px;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--border-dim);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.action-btn.complete:hover {
+  background: rgba(57, 255, 20, 0.1);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+}
+
+.action-btn.undo:hover {
+  background: rgba(252, 238, 10, 0.1);
+  border-color: var(--neon-yellow);
+  color: var(--neon-yellow);
+}
+
+.action-btn.delete-btn:hover {
+  background: rgba(255, 0, 60, 0.1);
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+/* Cyber Corner Clip */
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-deep);
+  border-bottom-left-radius: 4px;
+}

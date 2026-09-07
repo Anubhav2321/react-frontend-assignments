@@ -1,0 +1,130 @@
+.orders-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  animation: slideIn 0.4s ease;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.order-card {
+  padding: 25px;
+  border-radius: 8px;
+  border-left: 4px solid var(--neon-cyan);
+  transition: all 0.3s;
+}
+
+.order-card:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+}
+
+.order-card.cancelled-order {
+  border-left-color: var(--neon-magenta);
+  opacity: 0.7;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.order-id {
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.order-id span {
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 1px;
+}
+
+.order-date {
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.order-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.order-items {
+  flex-grow: 1;
+}
+
+.order-item-row {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  display: flex;
+  gap: 15px;
+}
+
+.order-item-qty {
+  color: var(--neon-cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  min-width: 25px;
+}
+
+.order-item-name {
+  color: var(--text-light);
+}
+
+.order-meta {
+  text-align: right;
+  min-width: 150px;
+}
+
+.order-total {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.order-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.text-cyan { color: var(--neon-cyan); }
+.text-magenta { color: var(--neon-magenta); }
+.text-green { color: #00ff88; }
+
+.order-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 15px;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .order-body {
+    flex-direction: column;
+  }
+  .order-meta {
+    text-align: left;
+    margin-top: 15px;
+  }
+  .order-status {
+    justify-content: flex-start;
+  }
+}
