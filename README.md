@@ -55,6 +55,8 @@ A React-based student information portal that displays student details using reu
 #### Technologies
 - React
 - JSX
+- Node.js
+- Express.js
 - JavaScript
 - CSS
 
@@ -105,7 +107,8 @@ A weather dashboard application that integrates real-time weather information th
 
 #### Technologies
 - React
-- JavaScript
+- Node.js
+- Express.js
 - OpenWeatherMap API
 - Fetch API
 - Async/Await
@@ -118,6 +121,106 @@ A weather dashboard application that integrates real-time weather information th
 
 ---
 
+### Assignment 05 — Online Shopping Cart
+
+A premium online shopping cart application demonstrating complex global state management and e-commerce logic.
+
+#### Key Features
+- Product List
+- Add to Cart & Remove Item
+- Quantity Update Controls
+- Grand Total Calculation
+- Coupon Code Application (Percentage Discount)
+- GST Calculation
+- Slide-out Cart Drawer
+
+#### Technologies
+- React
+- Context API
+- useReducer
+- Node.js
+- Express.js
+- CSS
+
+📁 Project: `premium-shopping-cart`
+
+---
+
+### Assignment 06 — Task Manager with Routing
+
+A single-page task management application with dynamic routing and full CRUD functionality.
+
+#### Key Features
+- Dashboard
+- Task List (Description, Priority, Category, Due Date, Status)
+- Add Task & Task Details Views
+- Completed Tasks Filter
+- URL Parameters & Dynamic Routes
+- Nested Navigation
+- Basic Route Protection
+
+#### Technologies
+- React
+- React Router DOM
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- CSS
+
+📁 Project: `nexus-task-hub`
+
+---
+
+### Assignment 07 — Authentication System
+
+A secure JWT-based authentication system integrated seamlessly into the Task Manager application.
+
+#### Key Features
+- Login & Logout Functionality
+- Protected Dashboard & Routes
+- Remember User (localStorage / sessionStorage)
+- JWT Token Validation
+- Username & Password Validation
+- Real-time Password Strength Meter
+
+#### Technologies
+- React
+- Context API
+- Node.js
+- Express.js
+- jsonwebtoken (JWT)
+- bcryptjs
+
+📁 Project: `nexus-task-hub`
+
+---
+
+### Assignment 08 — Expense Tracker
+
+A responsive Single Page Application (SPA) for recording, categorizing, and analyzing financial transactions.
+
+#### Key Features
+- Add & Delete Expense (Controlled Components)
+- Monthly Summary
+- Category Filter
+- Pie Chart (Expenses by Category)
+- Bar Chart (Income vs Expense)
+- Line Chart (Per Day Expense Trend)
+- Export Data to CSV
+- Data Persistence with localStorage
+
+#### Technologies
+- React
+- Recharts (Data Visualization)
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- CSS
+
+📁 Project: `expense-tracker-pro`
+
+---
+
 ## 🗂️ Repository Structure
 
 ```text
@@ -127,9 +230,21 @@ react-frontend-assignments/
 │   ├── backend/
 │   └── frontend/
 │
+├── expense-tracker-pro/
+│   ├── backend/
+│   └── frontend/
+│
+├── nexus-task-hub/
+│   ├── backend/
+│   └── frontend/
+│
 ├── portfolio-website/
 │   ├── client/
 │   └── server/
+│
+├── premium-shopping-cart/
+│   ├── backend/
+│   └── frontend/
 │
 ├── student-management-system/
 │   ├── backend/
