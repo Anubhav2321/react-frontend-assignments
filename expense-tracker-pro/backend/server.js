@@ -34,8 +34,6 @@ mongoose.connect(MONGO_URI)
 // Vercel Serverless Function er jonno app export kora hocche
 export default app;
 
-/* 
 // Local machine-e test korar shomoy nicher line gulo uncomment kore nite paro
-// const PORT = process.env.PORT || 5000;
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-*/
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

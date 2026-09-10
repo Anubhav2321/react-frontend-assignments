@@ -9,27 +9,30 @@ import AddTask from './pages/AddTask';
 import TaskDetails from './pages/TaskDetails';
 import CompletedTasks from './pages/CompletedTasks';
 import './App.css';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        
-        <Route element={<ProtectedRoute />}>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/tasks" element={<Tasks />} />
-            <Route path="/tasks/new" element={<AddTask />} />
-            <Route path="/tasks/:id" element={<TaskDetails />} />
-            <Route path="/completed" element={<CompletedTasks />} />
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          
+          <Route element={<ProtectedRoute />}>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/tasks" element={<Tasks />} />
+              <Route path="/tasks/new" element={<AddTask />} />
+              <Route path="/tasks/:id" element={<TaskDetails />} />
+              <Route path="/completed" element={<CompletedTasks />} />
+            </Route>
           </Route>
-        </Route>
-        
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+          
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

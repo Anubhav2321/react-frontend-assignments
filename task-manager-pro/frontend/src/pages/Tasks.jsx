@@ -84,11 +84,11 @@ const Tasks = () => {
       </div>
 
       {loading ? (
-        <div className="loading neon-text">LOADING...</div>
+        <div className="loading">Loading...</div>
       ) : (
         <div className="task-list">
           {filteredTasks.length === 0 ? (
-            <p className="empty-state">No active tasks found matching criteria.</p>
+            <div className="empty-state">No active tasks found matching criteria.</div>
           ) : (
             filteredTasks.map(task => (
               <TaskCard 

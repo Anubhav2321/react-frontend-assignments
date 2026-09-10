@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, ListTodo, PlusSquare, CheckCircle, LogOut } from 'lucide-react';
+import { LayoutDashboard, ListTodo, PlusSquare, CheckCircle, LogOut, Moon, Sun } from 'lucide-react';
+import { ThemeContext } from '../context/ThemeContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleLogout = () => {
     localStorage.removeItem('dummy-auth-token');
@@ -14,7 +16,7 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <h1 className="neon-text">TaskPro</h1>
+        <h1 className="logo-text">TaskPro</h1>
       </div>
       
       <nav className="sidebar-nav">
@@ -37,6 +39,10 @@ const Sidebar = () => {
       </nav>
 
       <div className="sidebar-footer">
+        <button onClick={toggleTheme} className="theme-toggle-btn">
+          {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+        </button>
         <button onClick={handleLogout} className="logout-btn">
           <LogOut size={20} />
           <span>Logout</span>

@@ -6,15 +6,21 @@ import './TaskCard.css';
 const TaskCard = ({ task, onStatusToggle, onDelete }) => {
   const navigate = useNavigate();
   
-  // Neon glow class based on priority
   let priorityClass = 'priority-medium';
-  if (task.priority === 'High') priorityClass = 'priority-high';
-  if (task.priority === 'Low') priorityClass = 'priority-low';
+  let priorityTextClass = 'text-warning';
+  if (task.priority === 'High') {
+    priorityClass = 'priority-high';
+    priorityTextClass = 'text-danger';
+  }
+  if (task.priority === 'Low') {
+    priorityClass = 'priority-low';
+    priorityTextClass = 'text-primary';
+  }
 
   const isCompleted = task.status === 'Completed';
 
   return (
-    <div className={`task-card ${priorityClass} ${isCompleted ? 'completed-card' : ''}`}>
+    <div className={`task-card glass-card ${priorityClass} ${isCompleted ? 'completed-card' : ''}`}>
       <div className="task-card-content" onClick={() => navigate(`/tasks/${task._id}`)}>
         <h3 className={`task-title ${isCompleted ? 'strike-through' : ''}`}>
           {task.description}
@@ -24,7 +30,7 @@ const TaskCard = ({ task, onStatusToggle, onDelete }) => {
           <span className="meta-item category">
             <Tag size={14} /> {task.category || 'General'}
           </span>
-          <span className={`meta-item priority ${priorityClass}-text`}>
+          <span className={`meta-item priority ${priorityTextClass}`}>
             <AlertCircle size={14} /> {task.priority}
           </span>
           {task.dueDate && (
@@ -37,13 +43,13 @@ const TaskCard = ({ task, onStatusToggle, onDelete }) => {
       
       <div className="task-card-actions">
         <button 
-          className={`action-btn toggle-btn ${isCompleted ? 'undo' : 'complete'}`}
+          className={`btn btn-secondary action-btn ${isCompleted ? 'undo' : 'complete'}`}
           onClick={(e) => { e.stopPropagation(); onStatusToggle(task); }}
         >
           {isCompleted ? 'Undo' : 'Complete'}
         </button>
         <button 
-          className="action-btn delete-btn"
+          className="btn btn-secondary action-btn delete-btn"
           onClick={(e) => { e.stopPropagation(); onDelete(task._id); }}
         >
           Delete

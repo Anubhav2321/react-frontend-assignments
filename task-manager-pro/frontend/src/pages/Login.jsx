@@ -18,37 +18,37 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h2 className="neon-text text-center">CyberTask</h2>
-        <p className="subtitle text-center mb-4">Initialize System Access</p>
+      <div className="login-card glass-card">
+        <h2 className="text-center logo-text">TaskPro</h2>
+        <p className="subtitle text-center mb-4">Sign in to your account</p>
         
         <form onSubmit={handleLogin} className="login-form">
           <div className="form-group">
-            <label>Operator ID</label>
+            <label className="form-label">Username</label>
             <input 
               type="text" 
               value={username} 
               onChange={(e) => setUsername(e.target.value)} 
-              placeholder="Enter any username" 
-              className="cyber-input"
+              placeholder="Enter your username" 
+              className="form-input"
               required 
             />
           </div>
           
           <div className="form-group">
-            <label>Passcode</label>
+            <label className="form-label">Password</label>
             <input 
               type="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              placeholder="Enter any password" 
-              className="cyber-input"
+              placeholder="Enter your password" 
+              className="form-input"
               required 
             />
           </div>
           
-          <button type="submit" className="cyber-btn primary-btn mt-4">
-            ACCESS SYSTEM
+          <button type="submit" className="btn btn-primary mt-4 w-100">
+            Sign In
           </button>
         </form>
       </div>

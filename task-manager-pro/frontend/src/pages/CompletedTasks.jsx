@@ -62,14 +62,14 @@ const CompletedTasks = () => {
 
   return (
     <div className="page-container">
-      <h2 className="page-title green-text">Archived / Completed</h2>
+      <h2 className="page-title text-success">Completed Tasks</h2>
 
       {loading ? (
-        <div className="loading neon-text">LOADING...</div>
+        <div className="loading">Loading...</div>
       ) : (
         <div className="task-list">
           {tasks.length === 0 ? (
-            <p className="empty-state">No completed tasks yet.</p>
+            <div className="empty-state">No completed tasks yet.</div>
           ) : (
             tasks.map(task => (
               <TaskCard 

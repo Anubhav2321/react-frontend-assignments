@@ -14,17 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// @desc    Add a transaction
-// @route   POST /api/transactions
-router.get('/', async (req, res) => {
-  try {
-    const transactions = await Transaction.find().sort({ date: -1 });
-    res.status(200).json(transactions);
-  } catch (error) {
-    res.status(500).json({ message: 'Server Error', error: error.message });
-  }
-});
-// wait, the second one is POST. Let me write it properly.
+
 router.post('/', async (req, res) => {
   try {
     const { amount, type, category, date, description } = req.body;

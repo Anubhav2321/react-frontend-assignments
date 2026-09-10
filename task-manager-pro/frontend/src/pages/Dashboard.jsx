@@ -36,7 +36,7 @@ const Dashboard = () => {
     { name: 'Completed', value: completedTasks }
   ];
   
-  const COLORS = ['#00f3ff', '#39ff14']; // Cyan for pending, Neon Green for completed
+  const COLORS = ['#3b82f6', '#10b981']; // Primary Blue for pending, Success Green for completed
 
   const priorityData = [
     { name: 'High', count: tasks.filter(t => t.priority === 'High').length },
@@ -44,33 +44,33 @@ const Dashboard = () => {
     { name: 'Low', count: tasks.filter(t => t.priority === 'Low').length }
   ];
 
-  if (loading) return <div className="loading neon-text">LOADING METRICS...</div>;
+  if (loading) return <div className="loading">Loading Metrics...</div>;
 
   return (
     <div className="page-container dashboard-page">
       <h2 className="page-title">System Status Overview</h2>
       
       <div className="stats-grid">
-        <div className="stat-card">
+        <div className="stat-card glass-card">
           <h3>Total Tasks</h3>
-          <p className="stat-value neon-text">{tasks.length}</p>
+          <p className="stat-value">{tasks.length}</p>
         </div>
-        <div className="stat-card">
+        <div className="stat-card glass-card">
           <h3>Pending</h3>
-          <p className="stat-value cyan-text">{pendingTasks}</p>
+          <p className="stat-value text-primary">{pendingTasks}</p>
         </div>
-        <div className="stat-card">
+        <div className="stat-card glass-card">
           <h3>Completed</h3>
-          <p className="stat-value green-text">{completedTasks}</p>
+          <p className="stat-value text-success">{completedTasks}</p>
         </div>
-        <div className="stat-card alert-card">
+        <div className="stat-card glass-card alert-card">
           <h3>High Priority</h3>
-          <p className="stat-value red-text">{highPriority}</p>
+          <p className="stat-value text-danger">{highPriority}</p>
         </div>
       </div>
 
       <div className="charts-container mt-6">
-        <div className="chart-wrapper">
+        <div className="chart-wrapper glass-card">
           <h3 className="chart-title">Completion Ratio</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -90,25 +90,25 @@ const Dashboard = () => {
                 ))}
               </Pie>
               <Tooltip 
-                contentStyle={{ backgroundColor: '#050505', border: '1px solid #00f3ff' }}
-                itemStyle={{ color: '#fff' }}
+                contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-dim)', borderRadius: '8px', color: 'var(--text-main)' }}
+                itemStyle={{ color: 'var(--text-main)' }}
               />
             </PieChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="chart-wrapper">
+        <div className="chart-wrapper glass-card">
           <h3 className="chart-title">Tasks by Priority</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={priorityData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#222" vertical={false} />
-              <XAxis dataKey="name" stroke="#888" tick={{ fill: '#00f3ff' }} />
-              <YAxis stroke="#888" tick={{ fill: '#00f3ff' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border-dim)" vertical={false} />
+              <XAxis dataKey="name" stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
+              <YAxis stroke="var(--text-muted)" tick={{ fill: 'var(--text-muted)' }} />
               <Tooltip 
-                cursor={{ fill: 'rgba(0, 243, 255, 0.1)' }}
-                contentStyle={{ backgroundColor: '#050505', border: '1px solid #ff003c' }}
+                cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
+                contentStyle={{ backgroundColor: 'var(--bg-panel)', border: '1px solid var(--border-dim)', borderRadius: '8px', color: 'var(--text-main)' }}
               />
-              <Bar dataKey="count" fill="#ff003c" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
