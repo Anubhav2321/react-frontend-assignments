@@ -9,10 +9,10 @@ app.use(express.json());
 
 // Dummy student data
 let students = [
-  { id: 1, name: 'Rahim Uddin', roll: '101', cgpa: 9.5, department: 'Computer Science', semester: '8th', phone: '+8801711000001', email: 'rahim@example.com', photo: '/images/default-avatar.png' },
-  { id: 2, name: 'Karim Hasan', roll: '102', cgpa: 8.8, department: 'Electrical Engineering', semester: '6th', phone: '+8801711000002', email: 'karim@example.com', photo: '/images/default2-avatar.png' },
-  { id: 3, name: 'Sadia Islam', roll: '103', cgpa: 9.8, department: 'Software Engineering', semester: '8th', phone: '+8801711000003', email: 'sadia@example.com', photo: '/images/default3-avatar.png' },
-  { id: 4, name: 'Arafat Rahman', roll: '104', cgpa: 7.9, department: 'Civil Engineering', semester: '4th', phone: '+8801711000004', email: 'arafat@example.com', photo: '/images/default4-avatar.png' },
+  { id: 1, name: 'Soham Shyamal ', roll: '101', cgpa: 9.5, department: 'Computer Science', semester: '8th', phone: '+8801711000001', email: 'soham@example.com', photo: '/images/default-avatar.png' },
+  { id: 2, name: 'Anubhav Samanta', roll: '102', cgpa: 8.8, department: 'Electrical Engineering', semester: '6th', phone: '+8801711000002', email: 'anubhav@example.com', photo: '/images/default2-avatar.png' },
+  { id: 3, name: 'Avik kulavi', roll: '103', cgpa: 9.8, department: 'Software Engineering', semester: '8th', phone: '+8801711000003', email: 'avik@example.com', photo: '/images/default3-avatar.png' },
+  { id: 4, name: 'Abhishek Chowdhoury', roll: '104', cgpa: 7.9, department: 'Civil Engineering', semester: '4th', phone: '+8801711000004', email: 'abhishek@example.com', photo: '/images/default4-avatar.png' },
   { id: 5, name: 'Nusrat Jahan', roll: '105', cgpa: 9.2, department: 'Architecture', semester: '5th', phone: '+8801711000005', email: 'nusrat@example.com', photo: '/images/default5-avatar.png' },
 ];
 
