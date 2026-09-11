@@ -97,19 +97,6 @@ const MOCK_DATA = [
   }
 ];
 
-const emptyForm = {
-  name: "Abhiskek Chowdhoury ",
-  employeeId: "EMP1004",
-  department: "Engineering",
-  gender: "Male",
-  phone: "7856987425",
-  email: "abhiskek.chowdhoury@example.com",
-  jobTitle: "mobile Developer",
-  localAddress: "New York, NY",
-  permanentAddress: "New York, NY",
-  status: "Active",
-  profilePic: "",
-};
 
 /* =====================================================
    HELPERS
