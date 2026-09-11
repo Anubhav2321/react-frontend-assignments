@@ -97,6 +97,19 @@ const MOCK_DATA = [
   }
 ];
 
+const emptyForm = {
+  name: "Employee Name",
+  employeeId: "Employee ID",
+  department: "Employee Department",
+  gender: "Male",
+  phone: "Employee Phone",
+  email: "em@example.com",
+  jobTitle: "mobile Developer",
+  localAddress: "New York, NY",
+  permanentAddress: "New York, NY",
+  status: "Active",
+  profilePic: "",
+};
 
 /* =====================================================
    HELPERS
