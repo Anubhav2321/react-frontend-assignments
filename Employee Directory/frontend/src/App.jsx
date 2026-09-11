@@ -23,8 +23,6 @@ import {
   Moon,
 } from "lucide-react";
 
-const API_URL = "http://localhost:5000/api";
-
 const DEPARTMENTS = [
   "Engineering",
   "Marketing",
@@ -38,17 +36,79 @@ const DEPARTMENTS = [
 
 const GENDERS = ["Male", "Female", "Other"];
 
+const DEFAULT_IMAGE = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
+
+const MOCK_DATA = [
+  {
+    id: "1",
+    name: "Anubhav Samanta",
+    employeeId: "EMP1001",
+    department: "Engineering",
+    gender: "Male",
+    phone: "09593428470",
+    email: "anubhavsamanta2005@gmail.com",
+    jobTitle: "Engineering Manager",
+    localAddress: "Local City",
+    permanentAddress: "Home City",
+    status: "Active",
+    profilePic: "https://avatars.githubusercontent.com/u/184535547?v=4"
+  },
+  {
+    id: "2",
+    name: "Avik Kulavi",
+    employeeId: "EMP1002",
+    department: "Design",
+    gender: "Male",
+    phone: "09123456789",
+    email: "avik.kulavi@example.com",
+    jobTitle: "UX Designer",
+    localAddress: "Metro Area",
+    permanentAddress: "Suburbs",
+    status: "Active",
+    profilePic: "https://avatars.githubusercontent.com/u/238877331?v=4"
+  },
+  {
+    id: "3",
+    name: "Soham Shymal",
+    employeeId: "EMP1003",
+    department: "Marketing",
+    gender: "Male",
+    phone: "09876543210",
+    email: "soham.shymal@example.com",
+    jobTitle: "Marketing Lead",
+    localAddress: "Downtown",
+    permanentAddress: "Uptown",
+    status: "On Leave",
+    profilePic: "https://avatars.githubusercontent.com/u/246440725?v=4"
+  },
+  {
+    id: "4",
+    name: "Abhiskek Chowdhoury",
+    employeeId: "EMP1004",
+    department: "Engineering",
+    gender: "Male",
+    phone: "7856987425",
+    email: "abhiskek.chowdhoury@example.com",
+    jobTitle: "Mobile Developer",
+    localAddress: "New York, NY",
+    permanentAddress: "New York, NY",
+    status: "Active",
+    profilePic: "https://avatars.githubusercontent.com/u/201191410?v=4"
+  }
+];
+
 const emptyForm = {
-  name: "",
-  employeeId: "",
+  name: "Abhiskek Chowdhoury ",
+  employeeId: "EMP1004",
   department: "Engineering",
   gender: "Male",
-  phone: "",
-  email: "",
-  jobTitle: "",
-  localAddress: "",
-  permanentAddress: "",
+  phone: "7856987425",
+  email: "abhiskek.chowdhoury@example.com",
+  jobTitle: "mobile Developer",
+  localAddress: "New York, NY",
+  permanentAddress: "New York, NY",
   status: "Active",
+  profilePic: "",
 };
 
 /* =====================================================
@@ -67,11 +127,9 @@ function getInitials(name = "") {
 
 function getAvatarClass(name = "") {
   let hash = 0;
-
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   }
-
   return `avatar-${Math.abs(hash) % 6}`;
 }
 
@@ -81,22 +139,10 @@ function getAvatarClass(name = "") {
 
 function Sidebar({ activePage, setActivePage }) {
   const items = [
-    {
-      label: "Dashboard",
-      icon: LayoutDashboard,
-    },
-    {
-      label: "Employees",
-      icon: Users,
-    },
-    {
-      label: "Attendance",
-      icon: CalendarCheck,
-    },
-    {
-      label: "Settings",
-      icon: Settings,
-    },
+    { label: "Dashboard", icon: LayoutDashboard },
+    { label: "Employees", icon: Users },
+    { label: "Attendance", icon: CalendarCheck },
+    { label: "Settings", icon: Settings },
   ];
 
   return (
@@ -105,7 +151,6 @@ function Sidebar({ activePage, setActivePage }) {
         <div className="brand-icon">
           <Users size={21} />
         </div>
-
         <div>
           <h2>PeopleOS</h2>
           <span>DIRECTORY</span>
@@ -127,7 +172,6 @@ function Sidebar({ activePage, setActivePage }) {
             >
               <Icon size={18} />
               <span>{item.label}</span>
-
               {active && item.label === "Employees" && (
                 <span className="nav-dot" />
               )}
@@ -139,7 +183,6 @@ function Sidebar({ activePage, setActivePage }) {
       <div className="sidebar-bottom">
         <div className="user-profile">
           <div className="user-avatar">AS</div>
-
           <div className="user-info">
             <strong>Anubhav S.</strong>
             <span>Admin</span>
@@ -161,7 +204,6 @@ function StatCard({ icon: Icon, title, value, type }) {
         <span>{title}</span>
         <strong>{value}</strong>
       </div>
-
       <div className="stat-icon">
         <Icon size={21} />
       </div>
@@ -177,18 +219,20 @@ function EmployeeCard({ employee, onEdit, onDelete }) {
   return (
     <div className="employee-card">
       <div className="employee-card-top">
-        <div className={`employee-avatar ${getAvatarClass(employee.name)}`}>
-          {getInitials(employee.name)}
+        <div className={`employee-avatar ${!employee.profilePic ? getAvatarClass(employee.name) : ''}`}>
+          {employee.profilePic ? (
+            <img src={employee.profilePic} alt={employee.name} onError={(e) => { e.target.src = DEFAULT_IMAGE; }} />
+          ) : (
+            <img src={DEFAULT_IMAGE} alt="Default Profile" />
+          )}
         </div>
 
         <div className="employee-main-info">
           <h3>{employee.name}</h3>
-
           <div className="employee-role">
             <Briefcase size={13} />
             <span>{employee.jobTitle || "Employee"}</span>
           </div>
-
           {employee.email && (
             <div className="employee-email">
               <Mail size={13} />
@@ -222,11 +266,9 @@ function EmployeeCard({ employee, onEdit, onDelete }) {
         <span className="employee-id">
           {employee.employeeId || "N/A"}
         </span>
-
         <span className="department-badge">
           {employee.department || "N/A"}
         </span>
-
         <span
           className={`status-badge ${
             employee.status === "Active"
@@ -248,7 +290,6 @@ function EmployeeCard({ employee, onEdit, onDelete }) {
             {employee.gender}
           </span>
         )}
-
         {employee.phone && (
           <span>
             <Phone size={13} />
@@ -264,12 +305,7 @@ function EmployeeCard({ employee, onEdit, onDelete }) {
    EMPLOYEE MODAL
 ===================================================== */
 
-function EmployeeModal({
-  isOpen,
-  employee,
-  onClose,
-  onSave,
-}) {
+function EmployeeModal({ isOpen, employee, onClose, onSave }) {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
 
@@ -288,19 +324,17 @@ function EmployeeModal({
         localAddress: employee.localAddress || "",
         permanentAddress: employee.permanentAddress || "",
         status: employee.status || "Active",
+        profilePic: employee.profilePic || "",
       });
     } else {
       setForm(emptyForm);
     }
   }, [employee, isOpen]);
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setForm((previous) => ({
       ...previous,
       [name]: value,
@@ -309,10 +343,10 @@ function EmployeeModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setSaving(true);
-
     try {
+      // Simulate slight network delay for feel
+      await new Promise((r) => setTimeout(r, 400));
       await onSave(form);
     } finally {
       setSaving(false);
@@ -321,38 +355,25 @@ function EmployeeModal({
 
   return (
     <div className="modal-overlay" onMouseDown={onClose}>
-      <div
-        className="employee-modal"
-        onMouseDown={(e) => e.stopPropagation()}
-      >
-        {/* Modal Header */}
+      <div className="employee-modal" onMouseDown={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div>
-            <h2>
-              {isEditing ? "Edit Employee" : "Add New Employee"}
-            </h2>
-
+            <h2>{isEditing ? "Edit Employee" : "Add New Employee"}</h2>
             <p>
               {isEditing
                 ? "Update employee information"
                 : "Enter employee information"}
             </p>
           </div>
-
           <button className="modal-close" onClick={onClose}>
             <X size={19} />
           </button>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit}>
           <div className="form-grid">
-            {/* Name */}
             <div className="form-group full">
-              <label>
-                Full Name <span>*</span>
-              </label>
-
+              <label>Full Name <span>*</span></label>
               <input
                 name="name"
                 value={form.name}
@@ -361,13 +382,8 @@ function EmployeeModal({
                 required
               />
             </div>
-
-            {/* Employee ID */}
             <div className="form-group">
-              <label>
-                Employee ID <span>*</span>
-              </label>
-
+              <label>Employee ID <span>*</span></label>
               <input
                 name="employeeId"
                 value={form.employeeId}
@@ -376,61 +392,30 @@ function EmployeeModal({
                 required
               />
             </div>
-
-            {/* Department */}
             <div className="form-group">
-              <label>
-                Department <span>*</span>
-              </label>
-
+              <label>Department <span>*</span></label>
               <div className="select-wrapper">
-                <select
-                  name="department"
-                  value={form.department}
-                  onChange={handleChange}
-                  required
-                >
-                  {DEPARTMENTS.map((department) => (
-                    <option key={department} value={department}>
-                      {department}
-                    </option>
+                <select name="department" value={form.department} onChange={handleChange} required>
+                  {DEPARTMENTS.map((dept) => (
+                    <option key={dept} value={dept}>{dept}</option>
                   ))}
                 </select>
-
                 <ChevronDown size={16} />
               </div>
             </div>
-
-            {/* Gender */}
             <div className="form-group">
-              <label>
-                Gender <span>*</span>
-              </label>
-
+              <label>Gender <span>*</span></label>
               <div className="select-wrapper">
-                <select
-                  name="gender"
-                  value={form.gender}
-                  onChange={handleChange}
-                  required
-                >
+                <select name="gender" value={form.gender} onChange={handleChange} required>
                   {GENDERS.map((gender) => (
-                    <option key={gender} value={gender}>
-                      {gender}
-                    </option>
+                    <option key={gender} value={gender}>{gender}</option>
                   ))}
                 </select>
-
                 <ChevronDown size={16} />
               </div>
             </div>
-
-            {/* Phone */}
             <div className="form-group">
-              <label>
-                Phone Number <span>*</span>
-              </label>
-
+              <label>Phone Number <span>*</span></label>
               <input
                 name="phone"
                 value={form.phone}
@@ -440,11 +425,8 @@ function EmployeeModal({
                 required
               />
             </div>
-
-            {/* Email */}
             <div className="form-group">
               <label>Email Address</label>
-
               <input
                 name="email"
                 value={form.email}
@@ -453,11 +435,18 @@ function EmployeeModal({
                 type="email"
               />
             </div>
-
-            {/* Job Title */}
+            <div className="form-group full">
+              <label>Profile Image URL</label>
+              <input
+                name="profilePic"
+                value={form.profilePic}
+                onChange={handleChange}
+                placeholder="https://example.com/avatar.jpg"
+                type="url"
+              />
+            </div>
             <div className="form-group">
               <label>Job Title</label>
-
               <input
                 name="jobTitle"
                 value={form.jobTitle}
@@ -465,77 +454,51 @@ function EmployeeModal({
                 placeholder="Software Engineer"
               />
             </div>
-
-            {/* Status */}
             <div className="form-group">
               <label>Status</label>
-
               <div className="select-wrapper">
-                <select
-                  name="status"
-                  value={form.status}
-                  onChange={handleChange}
-                >
+                <select name="status" value={form.status} onChange={handleChange}>
                   <option value="Active">Active</option>
                   <option value="On Leave">On Leave</option>
                   <option value="Pending">Pending</option>
                 </select>
-
                 <ChevronDown size={16} />
               </div>
             </div>
-
-            {/* Local Address */}
             <div className="form-group full">
               <label>Local Address</label>
-
               <textarea
                 name="localAddress"
                 value={form.localAddress}
                 onChange={handleChange}
                 placeholder="Enter local address"
-                rows="3"
+                rows="2"
               />
             </div>
-
-            {/* Permanent Address */}
             <div className="form-group full">
               <label>Permanent Address</label>
-
               <textarea
                 name="permanentAddress"
                 value={form.permanentAddress}
                 onChange={handleChange}
                 placeholder="Enter permanent address"
-                rows="3"
+                rows="2"
               />
             </div>
           </div>
 
-          {/* Modal Actions */}
           <div className="modal-actions">
-            <button
-              type="button"
-              className="secondary-btn"
-              onClick={onClose}
-            >
+            <button type="button" className="secondary-btn" onClick={onClose}>
               Cancel
             </button>
-
-            <button
-              type="submit"
-              className="primary-btn"
-              disabled={saving}
-            >
+            <button type="submit" className="primary-btn" disabled={saving}>
               {saving ? (
                 <>
-                  <Loader2 size={16} className="spin" />
-                  Saving...
+                  <Loader2 size={16} className="spin" /> Saving...
                 </>
               ) : (
                 <>
-                  <Plus size={16} />
-                  {isEditing ? "Update Employee" : "Add Employee"}
+                  <Plus size={16} /> {isEditing ? "Update Employee" : "Add Employee"}
                 </>
               )}
             </button>
@@ -550,42 +513,25 @@ function EmployeeModal({
    DELETE MODAL
 ===================================================== */
 
-function DeleteModal({
-  employee,
-  onClose,
-  onConfirm,
-}) {
-  if (!employee) {
-    return null;
-  }
+function DeleteModal({ employee, onClose, onConfirm }) {
+  if (!employee) return null;
 
   return (
     <div className="modal-overlay" onMouseDown={onClose}>
-      <div
-        className="delete-modal"
-        onMouseDown={(e) => e.stopPropagation()}
-      >
+      <div className="delete-modal" onMouseDown={(e) => e.stopPropagation()}>
         <div className="delete-icon">
           <Trash2 size={22} />
         </div>
-
         <h2>Delete Employee?</h2>
-
         <p>
-          Are you sure you want to delete{" "}
-          <strong>{employee.name}</strong>?
+          Are you sure you want to delete <strong>{employee.name}</strong>?
           <br />
           This action cannot be undone.
         </p>
-
         <div className="modal-actions">
-          <button className="secondary-btn" onClick={onClose}>
-            Cancel
-          </button>
-
+          <button className="secondary-btn" onClick={onClose}>Cancel</button>
           <button className="danger-btn" onClick={onConfirm}>
-            <Trash2 size={16} />
-            Delete
+            <Trash2 size={16} /> Delete
           </button>
         </div>
       </div>
@@ -598,23 +544,13 @@ function DeleteModal({
 ===================================================== */
 
 function Toast({ toast, onClose }) {
-  if (!toast) {
-    return null;
-  }
+  if (!toast) return null;
 
   return (
     <div className={`toast ${toast.type}`}>
-      {toast.type === "success" ? (
-        <CheckCircle2 size={19} />
-      ) : (
-        <AlertCircle size={19} />
-      )}
-
+      {toast.type === "success" ? <CheckCircle2 size={19} /> : <AlertCircle size={19} />}
       <span>{toast.message}</span>
-
-      <button onClick={onClose}>
-        <X size={15} />
-      </button>
+      <button onClick={onClose}><X size={15} /></button>
     </div>
   );
 }
@@ -625,66 +561,47 @@ function Toast({ toast, onClose }) {
 
 function App() {
   const [employees, setEmployees] = useState([]);
-
   const [loading, setLoading] = useState(true);
-
   const [search, setSearch] = useState("");
-
   const [department, setDepartment] = useState("All Departments");
-
   const [modalOpen, setModalOpen] = useState(false);
-
   const [editingEmployee, setEditingEmployee] = useState(null);
-
   const [deleteEmployee, setDeleteEmployee] = useState(null);
-
   const [toast, setToast] = useState(null);
-
   const [darkMode, setDarkMode] = useState(true);
-
   const [activePage, setActivePage] = useState("Employees");
 
-  /* =====================================================
-     TOAST
-  ===================================================== */
-
   const showToast = (message, type = "success") => {
-    setToast({
-      message,
-      type,
-    });
-
-    setTimeout(() => {
-      setToast(null);
-    }, 3000);
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
   };
 
   /* =====================================================
-     GET EMPLOYEES
+     LOCAL STORAGE LOGIC
   ===================================================== */
 
-  const fetchEmployees = async () => {
+  const fetchEmployees = () => {
+    setLoading(true);
     try {
-      setLoading(true);
-
-      const response = await fetch(`${API_URL}/employees`);
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch employees");
+      const stored = localStorage.getItem("employees");
+      let currentData = stored ? JSON.parse(stored) : [];
+      
+      // Ensure MOCK_DATA is always included (merge based on ID)
+      const existingIds = new Set(currentData.map(e => e.id));
+      const missingMockData = MOCK_DATA.filter(m => !existingIds.has(m.id));
+      
+      if (missingMockData.length > 0) {
+        currentData = [...missingMockData, ...currentData];
+        localStorage.setItem("employees", JSON.stringify(currentData));
       }
 
-      const data = await response.json();
-
-      setEmployees(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        "Could not connect to backend server",
-        "error"
-      );
+      setEmployees(currentData);
+    } catch (err) {
+      console.error(err);
+      showToast("Error loading data from local storage", "error");
+      setEmployees(MOCK_DATA);
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 300); // UI loading state feel
     }
   };
 
@@ -692,174 +609,62 @@ function App() {
     fetchEmployees();
   }, []);
 
+  const addEmployee = async (formData) => {
+    const newEmployee = { ...formData, id: crypto.randomUUID() };
+    const newEmployees = [...employees, newEmployee];
+    setEmployees(newEmployees);
+    localStorage.setItem("employees", JSON.stringify(newEmployees));
+    setModalOpen(false);
+    showToast("Employee added successfully");
+  };
+
+  const updateEmployee = async (formData) => {
+    const updatedEmployees = employees.map((emp) =>
+      emp.id === editingEmployee.id ? { ...formData, id: emp.id } : emp
+    );
+    setEmployees(updatedEmployees);
+    localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+    setModalOpen(false);
+    setEditingEmployee(null);
+    showToast("Employee updated successfully");
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteEmployee) return;
+    const filteredEmployees = employees.filter((emp) => emp.id !== deleteEmployee.id);
+    setEmployees(filteredEmployees);
+    localStorage.setItem("employees", JSON.stringify(filteredEmployees));
+    setDeleteEmployee(null);
+    showToast("Employee deleted successfully");
+  };
+
   /* =====================================================
-     STATISTICS
+     STATISTICS & FILTER
   ===================================================== */
 
   const statistics = useMemo(() => {
     const total = employees.length;
-
-    const active = employees.filter(
-      (employee) => employee.status === "Active"
-    ).length;
-
-    const departments = new Set(
-      employees
-        .map((employee) => employee.department)
-        .filter(Boolean)
-    ).size;
-
-    return {
-      total,
-      active,
-      departments,
-    };
+    const active = employees.filter((e) => e.status === "Active").length;
+    const departments = new Set(employees.map((e) => e.department).filter(Boolean)).size;
+    return { total, active, departments };
   }, [employees]);
-
-  /* =====================================================
-     SEARCH + DEPARTMENT FILTER
-  ===================================================== */
 
   const filteredEmployees = useMemo(() => {
     const query = search.toLowerCase().trim();
-
     return employees.filter((employee) => {
       const matchesSearch =
         !query ||
-        String(employee.name || "")
-          .toLowerCase()
-          .includes(query) ||
-        String(employee.employeeId || "")
-          .toLowerCase()
-          .includes(query) ||
-        String(employee.department || "")
-          .toLowerCase()
-          .includes(query) ||
-        String(employee.phone || "")
-          .toLowerCase()
-          .includes(query);
-
-      const matchesDepartment =
-        department === "All Departments" ||
-        employee.department === department;
-
+        String(employee.name || "").toLowerCase().includes(query) ||
+        String(employee.employeeId || "").toLowerCase().includes(query) ||
+        String(employee.department || "").toLowerCase().includes(query) ||
+        String(employee.phone || "").toLowerCase().includes(query);
+      const matchesDepartment = department === "All Departments" || employee.department === department;
       return matchesSearch && matchesDepartment;
     });
   }, [employees, search, department]);
 
   /* =====================================================
-     ADD EMPLOYEE
-  ===================================================== */
-
-  const addEmployee = async (formData) => {
-    try {
-      const response = await fetch(`${API_URL}/employees`, {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add employee");
-      }
-
-      await fetchEmployees();
-
-      setModalOpen(false);
-
-      showToast("Employee added successfully");
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        "Failed to add employee",
-        "error"
-      );
-    }
-  };
-
-  /* =====================================================
-     UPDATE EMPLOYEE
-  ===================================================== */
-
-  const updateEmployee = async (formData) => {
-    try {
-      const response = await fetch(
-        `${API_URL}/employees/${editingEmployee.id}`,
-        {
-          method: "PUT",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to update employee");
-      }
-
-      await fetchEmployees();
-
-      setModalOpen(false);
-
-      setEditingEmployee(null);
-
-      showToast("Employee updated successfully");
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        "Failed to update employee",
-        "error"
-      );
-    }
-  };
-
-  /* =====================================================
-     DELETE EMPLOYEE
-  ===================================================== */
-
-  const confirmDelete = async () => {
-    if (!deleteEmployee) {
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `${API_URL}/employees/${deleteEmployee.id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to delete employee");
-      }
-
-      await fetchEmployees();
-
-      setDeleteEmployee(null);
-
-      showToast("Employee deleted successfully");
-    } catch (error) {
-      console.error(error);
-
-      showToast(
-        "Failed to delete employee",
-        "error"
-      );
-    }
-  };
-
-  /* =====================================================
-     OPEN ADD MODAL
+     HANDLERS
   ===================================================== */
 
   const openAddEmployee = () => {
@@ -867,18 +672,10 @@ function App() {
     setModalOpen(true);
   };
 
-  /* =====================================================
-     OPEN EDIT MODAL
-  ===================================================== */
-
   const openEditEmployee = (employee) => {
     setEditingEmployee(employee);
     setModalOpen(true);
   };
-
-  /* =====================================================
-     CLOSE MODAL
-  ===================================================== */
 
   const closeModal = () => {
     setModalOpen(false);
@@ -891,157 +688,69 @@ function App() {
 
   return (
     <div className={darkMode ? "app dark" : "app light"}>
-      {/* Sidebar */}
-
-      <Sidebar
-        activePage={activePage}
-        setActivePage={setActivePage}
-      />
-
-      {/* Main Content */}
+      <Sidebar activePage={activePage} setActivePage={setActivePage} />
 
       <main className="main-content">
         <div className="content-wrapper">
-
-          {/* ================= HEADER ================= */}
-
           <header className="page-header">
             <div>
-              <div className="breadcrumb">
-                PeopleOS / Employees
-              </div>
-
+              <div className="breadcrumb">PeopleOS / Employees</div>
               <h1>Employee Directory</h1>
-
-              <p>
-                Manage and monitor your organization&apos;s
-                employees
-              </p>
+              <p>Manage and monitor your organization&apos;s employees</p>
             </div>
-
             <div className="header-actions">
-              <button
-                className="theme-btn"
-                onClick={() => setDarkMode(!darkMode)}
-                title="Toggle Theme"
-              >
-                {darkMode ? (
-                  <Sun size={18} />
-                ) : (
-                  <Moon size={18} />
-                )}
+              <button className="theme-btn" onClick={() => setDarkMode(!darkMode)} title="Toggle Theme">
+                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
-
-              <button
-                className="primary-btn new-employee-btn"
-                onClick={openAddEmployee}
-              >
-                <Plus size={17} />
-                New Employee
+              <button className="primary-btn new-employee-btn" onClick={openAddEmployee}>
+                <Plus size={17} /> New Employee
               </button>
             </div>
           </header>
 
-          {/* ================= STATS ================= */}
-
           <section className="stats-grid">
-            <StatCard
-              icon={Users}
-              title="Total Employees"
-              value={statistics.total}
-              type="blue"
-            />
-
-            <StatCard
-              icon={UserCircle}
-              title="Active Employees"
-              value={statistics.active}
-              type="green"
-            />
-
-            <StatCard
-              icon={Building2}
-              title="Total Departments"
-              value={statistics.departments}
-              type="purple"
-            />
+            <StatCard icon={Users} title="Total Employees" value={statistics.total} type="blue" />
+            <StatCard icon={UserCircle} title="Active Employees" value={statistics.active} type="green" />
+            <StatCard icon={Building2} title="Total Departments" value={statistics.departments} type="purple" />
           </section>
-
-          {/* ================= TOOLBAR ================= */}
 
           <section className="directory-panel">
             <div className="directory-header">
               <div>
                 <h2>All Employees</h2>
-
-                <p>
-                  Showing {filteredEmployees.length} of{" "}
-                  {employees.length} employees
-                </p>
+                <p>Showing {filteredEmployees.length} of {employees.length} employees</p>
               </div>
-
               <div className="directory-tools">
-
-                {/* Search */}
-
                 <div className="search-box">
                   <Search size={17} />
-
                   <input
                     type="text"
                     placeholder="Search name, ID, department..."
                     value={search}
-                    onChange={(e) =>
-                      setSearch(e.target.value)
-                    }
+                    onChange={(e) => setSearch(e.target.value)}
                   />
-
                   {search && (
-                    <button
-                      onClick={() => setSearch("")}
-                      className="clear-search"
-                    >
+                    <button onClick={() => setSearch("")} className="clear-search">
                       <X size={14} />
                     </button>
                   )}
                 </div>
-
-                {/* Department Filter */}
-
                 <div className="filter-box">
-                  <select
-                    value={department}
-                    onChange={(e) =>
-                      setDepartment(e.target.value)
-                    }
-                  >
-                    <option>
-                      All Departments
-                    </option>
-
+                  <select value={department} onChange={(e) => setDepartment(e.target.value)}>
+                    <option>All Departments</option>
                     {DEPARTMENTS.map((item) => (
-                      <option key={item}>
-                        {item}
-                      </option>
+                      <option key={item}>{item}</option>
                     ))}
                   </select>
-
                   <ChevronDown size={16} />
                 </div>
               </div>
             </div>
 
-            {/* ================= EMPLOYEE LIST ================= */}
-
             <div className="directory-body">
-
               {loading ? (
                 <div className="loading-state">
-                  <Loader2
-                    size={34}
-                    className="spin"
-                  />
-
+                  <Loader2 size={34} className="spin" />
                   <p>Loading employees...</p>
                 </div>
               ) : filteredEmployees.length === 0 ? (
@@ -1049,22 +758,10 @@ function App() {
                   <div className="empty-icon">
                     <Users size={30} />
                   </div>
-
-                  <h3>
-                    No employees found
-                  </h3>
-
-                  <p>
-                    Try changing your search or
-                    department filter.
-                  </p>
-
-                  <button
-                    className="primary-btn"
-                    onClick={openAddEmployee}
-                  >
-                    <Plus size={16} />
-                    Add Employee
+                  <h3>No employees found</h3>
+                  <p>Try changing your search or department filter.</p>
+                  <button className="primary-btn" onClick={openAddEmployee}>
+                    <Plus size={16} /> Add Employee
                   </button>
                 </div>
               ) : (
@@ -1081,55 +778,19 @@ function App() {
               )}
             </div>
 
-            {/* ================= FOOTER ================= */}
-
-            {!loading &&
-              filteredEmployees.length > 0 && (
-                <div className="directory-footer">
-                  <span>
-                    {filteredEmployees.length} employee
-                    {filteredEmployees.length !== 1
-                      ? "s"
-                      : ""}{" "}
-                    displayed
-                  </span>
-
-                  <span>
-                    Employee Directory
-                  </span>
-                </div>
-              )}
+            {!loading && filteredEmployees.length > 0 && (
+              <div className="directory-footer">
+                <span>{filteredEmployees.length} employee{filteredEmployees.length !== 1 ? "s" : ""} displayed</span>
+                <span>Employee Directory</span>
+              </div>
+            )}
           </section>
         </div>
       </main>
 
-      {/* ================= ADD / EDIT MODAL ================= */}
-
-      <EmployeeModal
-        isOpen={modalOpen}
-        employee={editingEmployee}
-        onClose={closeModal}
-        onSave={
-          editingEmployee
-            ? updateEmployee
-            : addEmployee
-        }
-      />
-
-      {/* ================= DELETE MODAL ================= */}
-
-      <DeleteModal
-        employee={deleteEmployee}
-        onClose={() => setDeleteEmployee(null)}
-        onConfirm={confirmDelete}
-      />
-
-      {/* ================= TOAST ================= */}
-
-      <Toast
-        toast={toast}
-        onClose={() => setToast(null)}
-      />
+      <EmployeeModal isOpen={modalOpen} employee={editingEmployee} onClose={closeModal} onSave={editingEmployee ? updateEmployee : addEmployee} />
+      <DeleteModal employee={deleteEmployee} onClose={() => setDeleteEmployee(null)} onConfirm={confirmDelete} />
+      <Toast toast={toast} onClose={() => setToast(null)} />
     </div>
   );
 }
