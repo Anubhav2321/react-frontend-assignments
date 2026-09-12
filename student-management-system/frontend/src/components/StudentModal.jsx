@@ -56,7 +56,7 @@ const StudentModal = ({ isOpen, onClose, onSubmit, initialData = null }) => {
         <h2>{isEditing ? 'Edit Student' : 'Add New Student'}</h2>
         
         <form onSubmit={handleSubmit} className="add-student-form">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="form-grid">
             <div className="form-group">
               <label>Name</label>
               <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="e.g. John Doe" />
