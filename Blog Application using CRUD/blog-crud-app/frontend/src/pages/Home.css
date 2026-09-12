@@ -1,0 +1,179 @@
+.home-page {
+  overflow-x: hidden;
+}
+
+.hero-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 65vh;
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: radial-gradient(circle at right, rgba(59, 130, 246, 0.05), transparent 60%);
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+  z-index: 10;
+  padding-right: 2rem;
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.highlight {
+  background: linear-gradient(to right, var(--accent-color), #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  animation: shimmer 5s infinite alternate;
+}
+
+@keyframes shimmer {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(30deg); }
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.hero-search-wrapper {
+  position: relative;
+  z-index: 20;
+}
+
+.hero-search-wrapper .search-container {
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.hero-search-wrapper .search-input-wrapper {
+  max-width: 100%;
+}
+
+.hero-spline {
+  position: absolute;
+  right: -10%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+/* Subtle overlay to prevent 3D canvas from being fully unclickable but preventing it from blocking scroll */
+.spline-overlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.section-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+}
+
+.section-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border-color), transparent);
+  margin-left: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding-top: 4rem;
+  }
+  
+  .hero-content {
+    padding-right: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-search-wrapper .search-container {
+    justify-content: center;
+  }
+  
+  .hero-spline {
+    position: relative;
+    right: 0;
+    width: 100%;
+    height: 400px;
+    margin-top: -2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .hero-spline {
+    height: 300px;
+  }
+}
+
+/* CSS 3D Cube Styles */
+.css-3d-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.css-3d-object {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.cube-face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid var(--accent-color);
+  background: rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.cube-face.front  { transform: translateZ(100px); }
+.cube-face.back   { transform: rotateY(180deg) translateZ(100px); }
+.cube-face.right  { transform: rotateY(90deg) translateZ(100px); }
+.cube-face.left   { transform: rotateY(-90deg) translateZ(100px); }
+.cube-face.top    { transform: rotateX(90deg) translateZ(100px); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(100px); }

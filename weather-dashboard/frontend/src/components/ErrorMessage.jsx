@@ -1,26 +1,10 @@
-import { AlertCircle } from 'lucide-react';
-
-const ErrorMessage = ({ message }) => {
+export default function ErrorMessage({ message }) {
+  if (!message) return null;
+  
   return (
-    <div 
-      className="fade-in"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        background: 'var(--error-bg)',
-        border: '1px solid var(--error-text)',
-        color: 'var(--error-text)',
-        padding: '1rem 1.5rem',
-        borderRadius: '12px',
-        marginTop: '1rem',
-        fontWeight: '500'
-      }}
-    >
-      <AlertCircle size={24} />
-      <p>{message}</p>
+    <div className="mx-auto max-w-md bg-rose-950/40 border border-rose-500/70 backdrop-blur-md text-rose-400 px-5 py-4 rounded-lg text-center font-mono text-sm tracking-widest shadow-[0_0_20px_rgba(225,29,72,0.3)] mb-6 uppercase">
+      <span className="font-bold mr-2 text-rose-500">⚠ SYSTEM WARNING:</span>
+      {message}
     </div>
   );
-};
-
-export default ErrorMessage;
+}

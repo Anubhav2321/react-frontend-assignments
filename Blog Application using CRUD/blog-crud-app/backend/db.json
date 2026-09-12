@@ -1,0 +1,94 @@
+{
+  "blogs": [
+    {
+      "id": "1",
+      "title": "The Future of Web Development with 3D Graphics",
+      "author": "Anubhav",
+      "content": "Web development is evolving rapidly. As browser capabilities expand, integrating 3D graphics directly into the DOM has become not just possible, but performant. Libraries like Three.js and abstraction layers like React Three Fiber allow developers to craft immersive experiences without leaving the React ecosystem.\n\nToday, we look at how to leverage tools like Spline to create visually stunning landing pages. By embedding a lightweight 3D scene, you can captivate users the moment they arrive. The blend of conventional UI with spatial design is the next frontier of digital experiences.",
+      "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "https://www.youtube.com/watch?v=FjYjE3n6y-8",
+      "date": "2023-11-01T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Mastering React Server Components",
+      "author": "Jane Doe",
+      "content": "React Server Components (RSC) represent a fundamental shift in how we build React applications. By executing components on the server and streaming the results to the client, RSCs significantly reduce the JavaScript bundle size and improve initial page load times.\n\nUnlike SSR (Server-Side Rendering), which sends HTML that must be hydrated, RSCs send a serialized representation of the React tree. This allows seamless blending of server-side data fetching with client-side interactivity, ushering in a new era of performance.",
+      "imageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-10-28T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "title": "Design Systems: The Bridge Between Design and Code",
+      "author": "Alex Smith",
+      "content": "A design system is more than a UI kit. It is a comprehensive guide that aligns designers and developers. By defining tokens for colors, typography, and spacing, teams can ensure consistency across vast applications.\n\nImplementing a design system in CSS using custom properties (variables) allows for powerful theming capabilities, such as effortless toggling between light and dark modes. It streamlines the workflow and reduces the cognitive load on developers when styling components.",
+      "imageUrl": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-10-29T09:15:00Z"
+    },
+    {
+      "id": "4",
+      "title": "Understanding Framer Motion for React",
+      "author": "Sarah Jenkins",
+      "content": "Animation is crucial for a premium user experience. Framer Motion is a production-ready motion library for React that makes creating complex animations incredibly simple. With its declarative API, you can animate components smoothly without writing complex CSS keyframes.\n\nFrom simple layout transitions to physics-based spring animations, Framer Motion handles it all. By wrapping your elements in `motion.div`, you unlock powerful layout animations and gesture recognition that elevate your app's feel.",
+      "imageUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "https://www.youtube.com/watch?v=2V1WK-3HQNk",
+      "date": "2023-11-05T08:20:00Z"
+    },
+    {
+      "id": "5",
+      "title": "Why Vite is Replacing Webpack",
+      "author": "Michael Chen",
+      "content": "For years, Webpack has been the undisputed king of JavaScript bundlers. However, the rise of native ES modules in the browser has paved the way for a new generation of tooling. Vite leverages these native modules during development, resulting in near-instantaneous Hot Module Replacement (HMR) regardless of the project size.\n\nVite pre-bundles dependencies using esbuild, which is written in Go and significantly faster than JavaScript-based bundlers. For production, it relies on Rollup, ensuring highly optimized static assets.",
+      "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-11-10T11:45:00Z"
+    },
+    {
+      "id": "6",
+      "title": "Building Accessible Forms",
+      "author": "Emily Davis",
+      "content": "Accessibility is not a feature; it's a requirement. When building web forms, ensuring that screen readers and keyboard users can navigate seamlessly is paramount. This involves using semantic HTML tags like `<label>` tied to inputs via the `for` and `id` attributes.\n\nFurthermore, providing clear, inline validation messages rather than relying solely on color coding ensures that users with color vision deficiencies can still understand error states. Always indicate required fields clearly and provide helpful placeholder text.",
+      "imageUrl": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-11-12T16:00:00Z"
+    },
+    {
+      "id": "7",
+      "title": "The Power of the Fetch API and Axios",
+      "author": "David Kim",
+      "content": "Interacting with APIs is fundamental to modern frontend development. While the native Fetch API is powerful, Axios remains popular due to its robust feature set. Axios automatically transforms JSON data, intercepts requests and responses, and provides a cleaner syntax for handling errors.\n\nCreating centralized API services in your React application keeps your components clean. By abstracting the HTTP calls, you make your code more maintainable and easier to test.",
+      "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-11-15T09:30:00Z"
+    },
+    {
+      "id": "8",
+      "title": "Embracing Glassmorphism in Modern UI",
+      "author": "Anubhav",
+      "content": "Glassmorphism is a design trend characterized by semi-transparent, blurred backgrounds that resemble frosted glass. It creates a sense of depth and hierarchy, allowing background elements to subtly peek through.\n\nTo achieve this effect in CSS, we use the `backdrop-filter: blur()` property along with a semi-transparent `background-color`. When combined with subtle borders and shadows, glassmorphism elevates a UI, making it feel sleek, modern, and premium.",
+      "imageUrl": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-11-18T13:15:00Z"
+    },
+    {
+      "id": "9",
+      "title": "State Management in 2024",
+      "author": "Lisa Wong",
+      "content": "The landscape of React state management has evolved. While Redux was once the default, developers now have a plethora of options like Zustand, Jotai, and Recoil. Furthermore, React's built-in Context API and hooks like `useReducer` often suffice for smaller applications.\n\nThe key is choosing the right tool for the job. For global UI state, Context is excellent. For complex, rapidly changing data, atomic libraries like Jotai or simplified stores like Zustand provide better performance and developer experience.",
+      "imageUrl": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-11-20T10:45:00Z"
+    },
+    {
+      "id": "10",
+      "title": "The Art of the Empty State",
+      "author": "Chris Evans",
+      "content": "Empty states are often an afterthought, but they represent a critical opportunity for user onboarding and delight. A blank screen can be confusing. Instead, a well-designed empty state should explain what goes there, why it's empty, and provide a clear call to action to populate it.\n\nUsing friendly illustrations, concise copy, and prominent buttons can transform a frustrating dead end into a helpful guide, encouraging users to engage with your application.",
+      "imageUrl": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "",
+      "date": "2023-11-22T14:00:00Z"
+    }
+  ]
+}

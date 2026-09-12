@@ -1,165 +1,159 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Sun, Moon, Search, Cloud } from 'lucide-react';
 import SearchBar from './components/SearchBar';
-import WeatherCard, { WeatherCardSkeleton } from './components/WeatherCard';
+import WeatherSidebar from './components/WeatherSidebar';
+import WeatherHighlights from './components/WeatherHighlights';
 import WeatherMap from './components/WeatherMap';
-import DynamicBackground from './components/DynamicBackground';
+import Spinner from './components/Spinner';
 import ErrorMessage from './components/ErrorMessage';
-import './index.css';
+import DynamicBackground from './components/DynamicBackground';
+import './App.css';
 
-function App() {
+export default function App() {
   const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setIsDarkMode(true);
-      document.body.classList.add('dark');
-    }
-    
-    // Try to get user location on load
-    handleLocate();
-  }, []);
-
-  const toggleTheme = () => {
-    setIsDarkMode(prev => {
-      const newMode = !prev;
-      if (newMode) {
-        document.body.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
-      return newMode;
-    });
-  };
+  const [isDark, setIsDark] = useState(true); // Default to Dark Mode
 
   const fetchWeather = async (city) => {
-    if (!city) return;
-    
-    setLoading(true);
-    setError(null);
-    setWeatherData(null);
-
-    try {
-      const response = await axios.get(`http://localhost:5000/api/weather/${city}`);
-      setWeatherData(response.data);
-    } catch (err) {
-      handleAxiosError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchWeatherByCoords = async (lat, lon) => {
-    setLoading(true);
-    setError(null);
-    setWeatherData(null);
-
-    try {
-      const response = await axios.get(`http://localhost:5000/api/weather/coords?lat=${lat}&lon=${lon}`);
-      setWeatherData(response.data);
-    } catch (err) {
-      handleAxiosError(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAxiosError = (err) => {
-    if (err.response && err.response.status === 404) {
-      setError('Location not found. Please try again.');
-    } else if (err.response && err.response.data && err.response.data.message) {
-      setError(err.response.data.message);
-    } else {
-      setError('An unexpected error occurred. Please try again later.');
-    }
-  };
-
-  const handleLocate = () => {
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by your browser.");
-      fetchWeather('London'); // fallback
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    if (!apiKey) {
+      setError('System Error: API key is missing. Check environment matrix.');
       return;
     }
-    
+
     setLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        fetchWeatherByCoords(position.coords.latitude, position.coords.longitude);
-      },
-      (err) => {
-        console.warn("Geolocation denied or failed.", err);
-        fetchWeather('London'); // fallback
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+          city
+        )}&units=metric&appid=${apiKey}`
+      );
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error('Location not found in database. Initiate new search.');
+        }
+        throw new Error('Network synchronization failed.');
       }
-    );
+
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (err) {
+      setError(err.message);
+      setWeatherData(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const weatherCondition = weatherData?.weather?.[0]?.main || 'Clear';
+  useEffect(() => {
+    // Initializing with default city
+    fetchWeather('Kolkata');
+  }, []);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+  };
+
+  const fetchWeatherByLocation = async (lat, lon) => {
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    if (!apiKey) {
+      setError('System Error: API key is missing. Check environment matrix.');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`
+      );
+
+      if (!response.ok) {
+        throw new Error('Network synchronization failed for coordinates.');
+      }
+
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (err) {
+      setError(err.message);
+      setWeatherData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <>
-      <DynamicBackground weatherCondition={weatherCondition} />
-      
-      <div className="app-wrapper">
-        {/* Sidebar / Left Column */}
-        <aside className="sidebar glass-panel fade-in">
+    <DynamicBackground isDark={isDark}>
+      <div className="app-wrapper fade-in">
+        
+        {/* Sidebar Panel */}
+        <aside className="glass-panel sidebar">
           <div className="sidebar-header">
-            <h1 className="logo">
-              <Cloud size={32} color="var(--primary-color)" />
-              WeatherDash
-            </h1>
-            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle Theme">
-              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            <div className="logo">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+              </svg>
+              Nexus Weather
+            </div>
+            <button className="theme-toggle" onClick={toggleTheme} title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+              {isDark ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              )}
             </button>
           </div>
-          
-          <div className="search-section">
-            <SearchBar onSearch={fetchWeather} onLocate={handleLocate} />
-            {error && <ErrorMessage message={error} />}
-          </div>
 
-          <div className="main-weather-section">
-            {loading ? (
-              <WeatherCardSkeleton isSidebar={true} />
-            ) : weatherData ? (
-              <WeatherCard data={weatherData} isSidebar={true} />
-            ) : null}
-          </div>
+          <SearchBar onSearch={fetchWeather} onLocate={fetchWeatherByLocation} />
+          
+          <ErrorMessage message={error} />
+          
+          {loading && <div className="flex justify-center my-8"><Spinner /></div>}
+          
+          {!loading && weatherData && (
+            <WeatherSidebar data={weatherData} />
+          )}
         </aside>
 
-        {/* Main Content / Right Column */}
-        <main className="main-content fade-in" style={{ animationDelay: '0.1s' }}>
-          
-          {loading ? (
-             <WeatherCardSkeleton isSidebar={false} />
-          ) : weatherData ? (
-             <WeatherCard data={weatherData} isSidebar={false} />
-          ) : null}
-
-          <div className="map-container glass-panel fade-in" style={{ animationDelay: '0.2s' }}>
-            <h3 className="section-title">Interactive Map</h3>
-            {(!loading && weatherData) ? (
-              <WeatherMap 
-                  lat={weatherData.coord.lat} 
-                  lon={weatherData.coord.lon} 
+        {/* Main Content Area */}
+        <main className="main-content">
+          {!loading && weatherData ? (
+            <>
+              <WeatherHighlights data={weatherData} />
+              
+              <div className="map-container fade-in">
+                <h3 className="section-title">Global Radar</h3>
+                <WeatherMap 
+                  lat={weatherData.coord?.lat} 
+                  lon={weatherData.coord?.lon} 
                   city={weatherData.name} 
-              />
-            ) : (
-              <div className="map-placeholder">
-                  <span>{loading ? 'Loading map data...' : 'Search for a city to view the map'}</span>
+                />
               </div>
-            )}
-          </div>
+            </>
+          ) : (
+             <div className="map-container fade-in" style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+               {loading ? <Spinner /> : <div className="text-xl text-slate-400 font-medium">Awaiting Atmospheric Data...</div>}
+             </div>
+          )}
         </main>
+        
       </div>
-    </>
+    </DynamicBackground>
   );
 }
-
-export default App;

@@ -36,7 +36,11 @@ const WeatherMap = ({ lat, lon, city }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
         />
-        {/* Weather Layer: Clouds (using OpenWeatherMap layer endpoint, free version might have limits, so using a reliable base tile) */}
+        <TileLayer
+          attribution='&copy; <a href="https://openweathermap.org/">OpenWeatherMap</a>'
+          url={`https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=${import.meta.env.VITE_WEATHER_API_KEY}`}
+          opacity={0.65}
+        />
         
         <MapUpdater center={position} />
         <Marker position={position}>
