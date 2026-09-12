@@ -18,25 +18,29 @@ const CartDrawer = ({ isOpen, onClose, onOrderPlaced }) => {
       total: grandTotal
     };
 
-    fetch('http://localhost:5000/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-      .then(res => res.json())
-      .then(data => {
-        setIsProcessing(false);
-        clearCart();
-        toast.success(`ORDER ${data.id} PLACED SUCCESSFULLY!`, {
-          style: { background: '#1f2833', color: '#0ff', border: '1px solid #0ff' },
-          iconTheme: { primary: '#0ff', secondary: '#000' }
-        });
-        if(onOrderPlaced) onOrderPlaced();
-      })
-      .catch(err => {
-        setIsProcessing(false);
-        toast.error('Checkout failed. System error.');
+    setTimeout(() => {
+      const stored = localStorage.getItem('luxeAuraOrders');
+      let orders = stored ? JSON.parse(stored) : [];
+      
+      const newOrder = {
+        id: `ORD-${Date.now().toString().slice(-6)}`,
+        date: new Date().toISOString(),
+        items: payload.items,
+        total: payload.total,
+        status: 'Processing'
+      };
+      
+      orders.push(newOrder);
+      localStorage.setItem('luxeAuraOrders', JSON.stringify(orders));
+      
+      setIsProcessing(false);
+      clearCart();
+      toast.success(`ORDER ${newOrder.id} PLACED SUCCESSFULLY!`, {
+        style: { background: '#f9f9fb', color: '#1a1a1a', border: '1px solid #d4af37' },
+        iconTheme: { primary: '#d4af37', secondary: '#fff' }
       });
+      if(onOrderPlaced) onOrderPlaced();
+    }, 800);
   };
 
   return (
@@ -45,7 +49,7 @@ const CartDrawer = ({ isOpen, onClose, onOrderPlaced }) => {
       
       <div className={`cart-drawer glass-panel ${isOpen ? 'open' : ''}`}>
         <div className="cart-header">
-          <h2>TERMINAL <span className="logo-highlight">CART</span></h2>
+          <h2>SHOPPING <span className="logo-highlight">CART</span></h2>
           <button className="close-btn" onClick={onClose}>
             <X size={24} />
           </button>
@@ -70,11 +74,11 @@ const CartDrawer = ({ isOpen, onClose, onOrderPlaced }) => {
           <div className="cart-footer">
             <BillSummary />
             <button 
-              className="cyber-btn checkout-btn" 
+              className="premium-btn checkout-btn" 
               onClick={handleCheckout}
               disabled={isProcessing}
             >
-              {isProcessing ? 'PROCESSING...' : 'INITIALIZE CHECKOUT'}
+              {isProcessing ? 'PROCESSING...' : 'SECURE CHECKOUT'}
             </button>
           </div>
         )}

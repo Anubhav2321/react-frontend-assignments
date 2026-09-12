@@ -20,7 +20,7 @@
   padding: 10px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  border: 1px dashed rgba(0, 255, 255, 0.3);
+  border: 1px dashed rgba(212, 175, 55, 0.3);
 }
 
 .coupon-hint {
@@ -45,13 +45,13 @@
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
 }
 
 .coupon-input-group input {
   width: 100%;
   background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(0, 255, 255, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   color: #fff;
   padding: 10px 10px 10px 35px;
   border-radius: 4px;
@@ -61,14 +61,14 @@
 }
 
 .coupon-input-group input:focus {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
 }
 
 .apply-btn {
-  background: rgba(0, 255, 255, 0.1);
-  color: var(--neon-cyan);
-  border: 1px solid var(--neon-cyan);
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
   padding: 0 15px;
   border-radius: 4px;
   font-weight: bold;
@@ -76,9 +76,9 @@
 }
 
 .apply-btn:hover:not(:disabled) {
-  background: var(--neon-cyan);
+  background: var(--accent-gold);
   color: #000;
-  box-shadow: 0 0 10px var(--neon-cyan);
+  box-shadow: var(--shadow-sm);
 }
 
 .apply-btn:disabled {
@@ -90,8 +90,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 255, 255, 0.1);
-  border: 1px dashed var(--neon-cyan);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px dashed var(--accent-gold);
   padding: 8px 12px;
   border-radius: 4px;
   margin: 15px 0;
@@ -101,7 +101,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -111,7 +111,7 @@
 }
 
 .discount-row .value {
-  color: var(--neon-magenta);
+  color: var(--accent-gold);
 }
 
 .gst-row {
@@ -127,9 +127,9 @@
 
 .grand-total {
   font-size: 1.2rem;
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
 }
 
 .glow-text {
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }

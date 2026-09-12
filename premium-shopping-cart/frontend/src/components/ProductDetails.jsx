@@ -18,7 +18,7 @@ const ProductDetails = ({ product, onBack }) => {
 
   return (
     <div className="product-details-container">
-      <button className="back-btn cyber-btn" onClick={onBack}>
+      <button className="back-btn premium-btn" onClick={onBack}>
         <ArrowLeft size={18} /> BACK TO INVENTORY
       </button>
 
@@ -54,7 +54,7 @@ const ProductDetails = ({ product, onBack }) => {
             </div>
           </div>
 
-          <button className="cyber-btn add-to-cart-large" onClick={handleAddToCart}>
+          <button className="premium-btn add-to-cart-large" onClick={handleAddToCart}>
             <ShoppingCart size={22} />
             ADD TO CART
           </button>

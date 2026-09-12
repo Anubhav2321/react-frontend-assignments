@@ -40,10 +40,10 @@ const ProductCard = ({ product, onSelectProduct }) => {
         <div className="product-footer">
           <span className="product-price">₹{product.price.toLocaleString('en-IN')}</span>
           <div className="card-actions" style={{ display: 'flex', gap: '8px' }}>
-            <button className="cyber-btn" style={{ padding: '8px' }} onClick={() => onSelectProduct(product)} title="View Details">
+            <button className="premium-btn" style={{ padding: '8px' }} onClick={() => onSelectProduct(product)} title="View Details">
               <Eye size={18} />
             </button>
-            <button className="cyber-btn add-btn" onClick={handleAddToCart}>
+            <button className="premium-btn add-btn" onClick={handleAddToCart}>
               <ShoppingCart size={18} />
               <span>ADD</span>
             </button>

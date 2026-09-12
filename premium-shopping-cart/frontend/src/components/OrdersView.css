@@ -15,16 +15,16 @@
 .order-card {
   padding: 25px;
   border-radius: 8px;
-  border-left: 4px solid var(--neon-cyan);
+  border-left: 4px solid var(--accent-gold);
   transition: all 0.3s;
 }
 
 .order-card:hover {
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
 }
 
 .order-card.cancelled-order {
-  border-left-color: var(--neon-magenta);
+  border-left-color: var(--accent-gold);
   opacity: 0.7;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .order-item-qty {
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
   font-family: 'Space Grotesk', sans-serif;
   min-width: 25px;
 }
@@ -99,8 +99,8 @@
   letter-spacing: 1px;
 }
 
-.text-cyan { color: var(--neon-cyan); }
-.text-magenta { color: var(--neon-magenta); }
+.text-cyan { color: var(--accent-gold); }
+.text-magenta { color: var(--accent-gold); }
 .text-green { color: #00ff88; }
 
 .order-footer {

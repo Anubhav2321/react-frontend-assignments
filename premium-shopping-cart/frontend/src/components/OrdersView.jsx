@@ -8,17 +8,13 @@ const OrdersView = ({ onBack }) => {
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = () => {
-    fetch('http://localhost:5000/api/orders')
-      .then(res => res.json())
-      .then(data => {
-        // Sort descending by date
-        setOrders(data.sort((a, b) => new Date(b.date) - new Date(a.date)));
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Error fetching orders:', err);
-        setLoading(false);
-      });
+    const stored = localStorage.getItem('luxeAuraOrders');
+    if (stored) {
+      setOrders(JSON.parse(stored).sort((a, b) => new Date(b.date) - new Date(a.date)));
+    } else {
+      setOrders([]);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -26,18 +22,18 @@ const OrdersView = ({ onBack }) => {
   }, []);
 
   const handleCancelOrder = (id) => {
-    fetch(`http://localhost:5000/api/orders/${id}`, { method: 'DELETE' })
-      .then(res => res.json())
-      .then(data => {
-        toast.success(data.message, {
-          style: { background: '#1f2833', color: '#f0f', border: '1px solid #f0f' },
-          iconTheme: { primary: '#f0f', secondary: '#000' }
-        });
-        fetchOrders();
-      })
-      .catch(err => {
-        toast.error('Failed to cancel order.');
+    const stored = localStorage.getItem('luxeAuraOrders');
+    if (stored) {
+      let currentOrders = JSON.parse(stored);
+      currentOrders = currentOrders.map(o => o.id === id ? { ...o, status: 'Cancelled' } : o);
+      localStorage.setItem('luxeAuraOrders', JSON.stringify(currentOrders));
+      
+      toast.success(`Order ${id} Cancelled`, {
+        style: { background: '#f9f9fb', color: '#1a1a1a', border: '1px solid #d4af37' },
+        iconTheme: { primary: '#d4af37', secondary: '#fff' }
       });
+      fetchOrders();
+    }
   };
 
   const getStatusIcon = (status) => {
@@ -51,12 +47,12 @@ const OrdersView = ({ onBack }) => {
   };
 
   if (loading) {
-    return <div className="loading-state neon-glow">FETCHING ORDERS...</div>;
+    return <div className="loading-state">LOADING ORDERS...</div>;
   }
 
   return (
     <div className="orders-container">
-      <button className="back-btn cyber-btn" onClick={onBack}>
+      <button className="back-btn premium-btn" onClick={onBack}>
         <ArrowLeft size={18} /> BACK TO HOME
       </button>
 
@@ -98,7 +94,7 @@ const OrdersView = ({ onBack }) => {
 
               {order.status === 'Processing' && (
                 <div className="order-footer">
-                  <button className="cyber-btn-magenta cancel-btn" onClick={() => handleCancelOrder(order.id)}>
+                  <button className="premium-btn cancel-btn" onClick={() => handleCancelOrder(order.id)}>
                     CANCEL ORDER
                   </button>
                 </div>

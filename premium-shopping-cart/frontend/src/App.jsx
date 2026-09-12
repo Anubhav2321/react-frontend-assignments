@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
@@ -14,6 +14,20 @@ function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'product', 'orders'
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('luxeAuraTheme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('luxeAuraTheme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   const navigateTo = (view, data = null) => {
     setCurrentView(view);
@@ -31,6 +45,8 @@ function App() {
         <Navbar 
           toggleCart={() => setIsCartOpen(!isCartOpen)} 
           navigateTo={navigateTo} 
+          theme={theme}
+          toggleTheme={toggleTheme}
         />
         
         <main>
@@ -63,7 +79,7 @@ function App() {
         />
         
         <button 
-          className="admin-fab cyber-btn" 
+          className="admin-fab premium-btn" 
           onClick={() => setIsAddProductOpen(true)}
         >
           + ADD PRODUCT

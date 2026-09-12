@@ -15,7 +15,7 @@
 
 .section-title {
   font-size: 2rem;
-  border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+  border-bottom: 2px solid rgba(212, 175, 55, 0.2);
   padding-bottom: 10px;
   margin: 0;
 }
@@ -31,13 +31,13 @@
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
 }
 
 .search-input {
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(0, 255, 255, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   color: var(--text-light);
   padding: 12px 20px 12px 45px;
   border-radius: 30px;
@@ -47,8 +47,8 @@
 }
 
 .search-input:focus {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
 }
 
 .category-filters {
@@ -69,21 +69,27 @@
 }
 
 .filter-btn:hover {
-  border-color: var(--neon-cyan);
-  color: var(--neon-cyan);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
 }
 
 .filter-btn.active {
-  background: rgba(0, 255, 255, 0.15);
-  border-color: var(--neon-cyan);
-  color: var(--neon-cyan);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .section-title { font-size: 1.5rem; }
+  .search-container { max-width: 100%; margin-top: 10px; }
+  .list-header { flex-direction: column; align-items: stretch; gap: 10px; }
 }
 
 .loading-state {
@@ -91,7 +97,7 @@
   margin-top: 100px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 2rem;
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
   letter-spacing: 5px;
 }
 
@@ -100,7 +106,7 @@
   margin-top: 60px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
-  color: var(--neon-magenta);
+  color: var(--accent-gold);
   letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }

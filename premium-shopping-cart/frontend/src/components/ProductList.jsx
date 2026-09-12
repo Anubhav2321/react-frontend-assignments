@@ -3,7 +3,65 @@ import { Search } from 'lucide-react';
 import ProductCard from './ProductCard';
 import './ProductList.css';
 
-const CATEGORIES = ['All', 'Electronics', 'Dresses', 'Shoes', 'Bags', 'Bottles'];
+const CATEGORIES = ['All', 'Watches', 'Electronics', 'Accessories', 'Bags', 'Shoes'];
+
+const DEFAULT_PRODUCTS = [
+  {
+    id: 1,
+    name: 'LuxeAura Series X',
+    brand: 'LuxeAura',
+    price: 12999,
+    category: 'Watches',
+    image: '/images/watch.jpg',
+    specs: ['Mechanical', 'Rose Gold', 'Sapphire Crystal'],
+  },
+  {
+    id: 2,
+    name: 'Acoustic Elegance',
+    brand: 'Aura',
+    price: 349,
+    category: 'Electronics',
+    image: '/images/headphones.jpg',
+    specs: ['Noise Cancelling', 'Wireless', 'Gold Accents'],
+  },
+  {
+    id: 3,
+    name: 'Midnight Obsidian',
+    brand: 'LuxeAura',
+    price: 299,
+    category: 'Accessories',
+    image: '/images/sunglasses.jpg',
+    specs: ['UV Protection', 'Gold Rims', 'Designer'],
+  },
+  {
+    id: 4,
+    name: 'T Shirt for Man',
+    brand: 'WROGN',
+    price: 399,
+    category: 'T Shirt',
+    image: 'https://m.media-amazon.com/images/I/61xTfKaqUlL._SY879_.jpg',
+    specs: ['UV Protection', 'Gold Rims', 'Designer'],
+  },
+  {
+    id: 5,
+    name: 'T Shirt for Man',
+    brand: 'Lymio Polo',
+    price: 658,
+    category: 'T Shirt',
+    image: 'https://m.media-amazon.com/images/I/61gGFX2urpL._SX679_.jpg',
+    specs: ['UV Protection', 'Gold Rims', 'Designer'],
+  },
+  {
+    id: 6,
+    name: 'Samsung Galaxy Z Fold8 Ultra 5G',
+    brand: 'Samsung',
+    price: 194999,
+    category: 'Smartphone with Galaxy AI ',
+    image: 'https://m.media-amazon.com/images/I/71Ocpa1KaiL._SX679_.jpg',
+    specs: ['UV Protection', 'Gold Rims', 'Designer'],
+  },
+ 
+];
 
 const ProductList = ({ onSelectProduct }) => {
   const [products, setProducts] = useState([]);
@@ -13,20 +71,21 @@ const ProductList = ({ onSelectProduct }) => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching products:", err);
-        setLoading(false);
-      });
+    // Simulate loading for premium feel
+    setTimeout(() => {
+      const stored = localStorage.getItem('luxeAuraProducts');
+      if (stored) {
+        setProducts(JSON.parse(stored));
+      } else {
+        setProducts(DEFAULT_PRODUCTS);
+        localStorage.setItem('luxeAuraProducts', JSON.stringify(DEFAULT_PRODUCTS));
+      }
+      setLoading(false);
+    }, 800);
   }, []);
 
   if (loading) {
-    return <div className="loading-state neon-glow">SYSTEM INITIALIZING...</div>;
+    return <div className="loading-state">CURATING COLLECTION...</div>;
   }
 
   // Filter products
@@ -69,7 +128,7 @@ const ProductList = ({ onSelectProduct }) => {
       </div>
 
       {filteredProducts.length === 0 ? (
-        <div className="no-results">NO MATCHING PRODUCTS FOUND IN DATABASE.</div>
+        <div className="no-results">NO EXCLUSIVE PIECES FOUND.</div>
       ) : (
         <div className="product-grid">
           {filteredProducts.map(product => (

@@ -8,7 +8,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
     name: '',
     brand: '',
     price: '',
-    category: 'Electronics',
+    category: 'Watches',
     image: '',
     specs: ''
   });
@@ -21,6 +21,17 @@ const AddProductModal = ({ isOpen, onClose }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -31,22 +42,26 @@ const AddProductModal = ({ isOpen, onClose }) => {
       specs: formData.specs.split(',').map(s => s.trim())
     };
 
-    fetch('http://localhost:5000/api/products', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(productPayload)
-    })
-      .then(res => res.json())
-      .then(data => {
-        setIsSubmitting(false);
-        toast.success(`${data.name} added to database! Refresh to view.`);
-        onClose();
-        setFormData({ name: '', brand: '', price: '', category: 'Electronics', image: '', specs: '' });
-      })
-      .catch(err => {
-        setIsSubmitting(false);
-        toast.error('Failed to add product.');
-      });
+    setTimeout(() => {
+      const stored = localStorage.getItem('luxeAuraProducts');
+      let products = stored ? JSON.parse(stored) : [];
+      
+      const newProduct = {
+        ...productPayload,
+        id: Date.now()
+      };
+      
+      products.push(newProduct);
+      localStorage.setItem('luxeAuraProducts', JSON.stringify(products));
+      
+      setIsSubmitting(false);
+      toast.success(`${newProduct.name} added to collection!`);
+      onClose();
+      setFormData({ name: '', brand: '', price: '', category: 'Watches', image: '', specs: '' });
+      
+      // Reload to reflect new products in the list
+      setTimeout(() => window.location.reload(), 1000);
+    }, 500);
   };
 
   return (
@@ -77,17 +92,19 @@ const AddProductModal = ({ isOpen, onClose }) => {
           <div className="form-group">
             <label>CATEGORY</label>
             <select name="category" value={formData.category} onChange={handleChange}>
+              <option value="Watches">Watches</option>
               <option value="Electronics">Electronics</option>
-              <option value="Dresses">Dresses</option>
-              <option value="Shoes">Shoes</option>
+              <option value="Accessories">Accessories</option>
               <option value="Bags">Bags</option>
-              <option value="Bottles">Bottles</option>
+              <option value="Shoes">Shoes</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label>IMAGE URL</label>
-            <input type="url" name="image" required value={formData.image} onChange={handleChange} placeholder="https://images.unsplash.com/photo-..." />
+            <label>IMAGE (URL OR FILE UPLOAD)</label>
+            <input type="text" name="image" value={formData.image} onChange={handleChange} placeholder="https://... or /images/..." />
+            <input type="file" accept="image/*" onChange={handleImageUpload} style={{ marginTop: '10px' }} />
+            {formData.image && <img src={formData.image} alt="Preview" style={{ marginTop: '10px', height: '60px', borderRadius: '4px', objectFit: 'cover' }} />}
           </div>
 
           <div className="form-group">
@@ -95,7 +112,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
             <input type="text" name="specs" required value={formData.specs} onChange={handleChange} placeholder="RGB, Wireless, Cherry MX" />
           </div>
 
-          <button type="submit" className="cyber-btn submit-btn" disabled={isSubmitting}>
+          <button type="submit" className="premium-btn submit-btn" disabled={isSubmitting}>
             <Upload size={18} />
             {isSubmitting ? 'UPLOADING...' : 'SAVE PRODUCT'}
           </button>

@@ -4,7 +4,7 @@
   z-index: 100;
   width: 100%;
   padding: 15px 0;
-  border-bottom: 1px solid var(--border-neon);
+  border-bottom: 1px solid var(--border-color);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
@@ -24,8 +24,8 @@
 }
 
 .logo-icon {
-  color: var(--neon-cyan);
-  animation: glow 3s infinite;
+  color: var(--accent-gold);
+  
 }
 
 .logo-text {
@@ -35,21 +35,21 @@
 }
 
 .logo-highlight {
-  color: var(--neon-magenta);
+  color: var(--accent-gold);
 }
 
 .cart-btn {
   position: relative;
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
   padding: 8px;
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .cart-btn:hover {
-  background: rgba(0, 255, 255, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: #fff;
-  box-shadow: 0 0 10px var(--neon-cyan);
+  box-shadow: var(--shadow-sm);
 }
 
 .cart-icon {
@@ -64,7 +64,7 @@
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: var(--neon-magenta);
+  background-color: var(--accent-gold);
   color: #000;
   font-size: 0.75rem;
   font-weight: bold;
@@ -74,5 +74,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 8px var(--neon-magenta);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .logo-text { font-size: 1.4rem; }
+  .logo-section img { height: 30px !important; }
+  .nav-actions button { 
+    margin-right: 5px !important; 
+    padding: 6px 12px !important; 
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text { display: none; }
+  .nav-actions button {
+    padding: 4px 8px !important;
+  }
+  .navbar-container { padding: 0 10px; }
 }

@@ -9,7 +9,7 @@
 }
 
 .cart-item:hover {
-  border-color: rgba(0, 255, 255, 0.3);
+  border-color: rgba(212, 175, 55, 0.3);
 }
 
 .cart-item-img-container {
@@ -42,7 +42,7 @@
 
 .cart-item-price {
   font-family: 'Space Grotesk', sans-serif;
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
   font-weight: 700;
   font-size: 0.9rem;
 }
@@ -72,7 +72,7 @@
 }
 
 .qty-btn:hover {
-  color: var(--neon-cyan);
+  color: var(--accent-gold);
 }
 
 .qty-display {
