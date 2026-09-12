@@ -94,7 +94,50 @@ const MOCK_DATA = [
     permanentAddress: "New York, NY",
     status: "Active",
     profilePic: "https://avatars.githubusercontent.com/u/201191410?v=4"
-  }
+  },
+  {
+    id: "5",
+    name: "Ankita Day",
+    employeeId: "EMP1005",
+    department: "Engineering",
+    gender: "Female",
+    phone: "7878453658",
+    email: "ankita.day@example.com",
+    jobTitle: "Mobile Developer",
+    localAddress: "New York, NY",
+    permanentAddress: "New York, NY",
+    status: "Active",
+    profilePic: "https://scontent.frdp2-1.fna.fbcdn.net/v/t39.30808-6/740659234_1640882404740712_1906748712263178205_n.jpg?stp=dst-jpg_tt6&cstp=mx1920x1920&ctp=s1920x1920&_nc_cat=106&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=l_2n0Yyk9IEQ7kNvwH3a3jt&_nc_oc=Adrk7RASWcJ74xa25FiWW_mWG14j41vM0hOSxHBH1od6Rz3Gt4F2k4xnmfpILQyBY1zA0K4x4dKPuuWNZzzoxyKC&_nc_zt=23&_nc_ht=scontent.frdp2-1.fna&_nc_gid=UUt6jZLEAWjx6IitI9ByyQ&_nc_ss=7b2a8&oh=00_AQJwGCXYJg9WemGM0ptrsQX6xREGxwGOr8NSb_Bjm48DXA&oe=6AAB4E54"
+  },
+  {
+    id: "6",
+    name: "Pallab Jana",
+    employeeId: "EMP1006",
+    department: "Engineering",
+    gender: "Male",
+    phone: "5478451258",
+    email: "pallab.jana@example.com",
+    jobTitle: "Frontend Developer",
+    localAddress: "Noida, UP",
+    permanentAddress: "New York, NY",
+    status: "Active",
+    profilePic: "https://scontent.frdp2-1.fna.fbcdn.net/v/t39.30808-6/574345790_1877800812778132_1288150325369449441_n.jpg?stp=dst-jpg_tt6&cstp=mx1080x1080&ctp=s1080x1080&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=ySv-BbFdvOQQ7kNvwHeE4eK&_nc_oc=Adq5SPuqkN7nCmtfkQxB-Ei8OwWM7K8MyYR5AX8r_D_Lra-O0k5hdNXm0V42h7Dxd80c7n8-btl4wyiQOeR6mYe5&_nc_zt=23&_nc_ht=scontent.frdp2-1.fna&_nc_gid=Gz5VwIeAS-CK1pGfpR2doA&_nc_ss=7b2a8&oh=00_AQKYLlFoN7sOj5ljs4tSY3c0bBJo_pb0yyPj7qu7Ln36Mg&oe=6AAB37CE"
+  },
+  {
+    id: "7",
+    name: "Elon Musk",
+    employeeId: "EMP1007",
+    department: "Sales",
+    gender: "Male",
+    phone: "9178546587",
+    email: "elon.musk@example.com",
+    jobTitle: "Hardware Engineer",
+    localAddress: "New York, NY",
+    permanentAddress: "New York, NY",
+    status: "Active",
+    profilePic: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOGassRq07kHlccLsD-wC2PqPaKBjloFMkKCs8Sm5C9g&s=10"
+  },
+
 ];
 
 const emptyForm = {
