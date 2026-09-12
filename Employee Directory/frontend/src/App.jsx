@@ -94,6 +94,20 @@ const MOCK_DATA = [
     permanentAddress: "New York, NY",
     status: "Active",
     profilePic: "https://avatars.githubusercontent.com/u/201191410?v=4"
+  },
+  {
+    id: "5",
+    name: "Ankita Day",
+    employeeId: "EMP1005",
+    department: "Finance",
+    gender: "Female",
+    phone: "7878563248",
+    email: "ankita.dayy@example.com",
+    jobTitle: "Mobile Developer",
+    localAddress: "New York, NY",
+    permanentAddress: "New York, NY",
+    status: "Active",
+    profilePic: "https://instagram.frdp2-1.fna.fbcdn.net/v/t51.82787-19/747588838_18090186443540100_1423203345579564438_n.jpg?efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.frdp2-1.fna.fbcdn.net&_nc_cat=100&_nc_oc=Q6cZ2gHNV6ktwY296PfUE5IvcmvoA7qwcEMluh06NWzrZdyUVsvih5vdrUPXpINDbPro3Mm4BXWoC0GggN318gkmUEFL&_nc_ohc=0rrPhMKeC7kQ7kNvwEGs3KG&_nc_gid=bdLLpJkKv9gAvttXoUuGkQ&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AQJ48DcN9CKc4Fn4P208bMqZ4aYsgbnSB5h66JVVwVPScQ&oe=6AAB4A75&_nc_sid=7a9f4b"
   }
 ];
 
