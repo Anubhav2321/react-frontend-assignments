@@ -1,0 +1,112 @@
+/* Responsive additions */
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+    padding: 24px;
+    padding-top: 70px;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: var(--bg-panel);
+    color: var(--text-main);
+    border: 1px solid var(--border-dim);
+    z-index: 90;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 95;
+    backdrop-filter: blur(2px);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  }
+  
+  .charts-container {
+    flex-direction: column !important;
+    display: flex;
+    gap: 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-content {
+    padding: 16px;
+    padding-top: 70px;
+  }
+
+  .flex-between {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 16px;
+  }
+  
+  .actions-group {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  
+  .actions-group input, 
+  .actions-group select {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .filter-group {
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .task-card {
+    padding: 16px;
+  }
+  
+  .task-title {
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+  
+  .task-meta {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  
+  .action-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+}

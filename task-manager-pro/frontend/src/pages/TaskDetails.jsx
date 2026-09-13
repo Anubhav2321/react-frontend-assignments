@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTasks } from '../context/TaskContext';
 import './Form.css';
 
 const TaskDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { tasks, updateTask } = useTasks();
+  
   const [task, setTask] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -15,48 +18,21 @@ const TaskDetails = () => {
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    fetchTask();
-  }, [id]);
-
-  const fetchTask = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/tasks/${id}`, {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}` }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setTask(data);
-        setDescription(data.description);
-        setPriority(data.priority);
-        setCategory(data.category || '');
-        setStatus(data.status);
-      }
-    } catch (error) {
-      console.error('Error fetching task details:', error);
-    } finally {
-      setLoading(false);
+    const foundTask = tasks.find(t => t._id === id);
+    if (foundTask) {
+      setTask(foundTask);
+      setDescription(foundTask.description);
+      setPriority(foundTask.priority);
+      setCategory(foundTask.category || '');
+      setStatus(foundTask.status);
     }
-  };
+    setLoading(false);
+  }, [id, tasks]);
 
-  const handleUpdate = async (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}`
-        },
-        body: JSON.stringify({
-          description, priority, category, status
-        })
-      });
-      if (res.ok) {
-        navigate(status === 'Completed' ? '/completed' : '/tasks');
-      }
-    } catch (error) {
-      console.error('Error updating task:', error);
-    }
+    updateTask(id, { description, priority, category, status });
+    navigate(status === 'Completed' ? '/completed' : '/tasks');
   };
 
   if (loading) return <div className="loading">Loading Data...</div>;

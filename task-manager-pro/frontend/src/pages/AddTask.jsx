@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTasks } from '../context/TaskContext';
 import './Form.css';
 
 const AddTask = () => {
@@ -9,30 +10,21 @@ const AddTask = () => {
   const [category, setCategory] = useState('General');
   const [dueDate, setDueDate] = useState('');
 
+  const { addTask } = useTasks();
+
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch('http://localhost:5000/api/tasks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}`
-        },
-        body: JSON.stringify({
-          description, priority, category, dueDate
-        })
-      });
-      
-      if (res.ok) {
-        navigate('/tasks');
-      }
-    } catch (error) {
-      console.error('Error creating task:', error);
-    }
+    addTask({
+      description,
+      priority,
+      category,
+      dueDate
+    });
+    navigate('/tasks');
   };
 
   return (

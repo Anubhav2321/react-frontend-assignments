@@ -1,30 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { useTasks } from '../context/TaskContext';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/tasks', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}` }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setTasks(data);
-      }
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { tasks, loading, exportTasks } = useTasks();
 
   const pendingTasks = tasks.filter(t => t.status === 'Pending').length;
   const completedTasks = tasks.filter(t => t.status === 'Completed').length;
@@ -48,7 +28,10 @@ const Dashboard = () => {
 
   return (
     <div className="page-container dashboard-page">
-      <h2 className="page-title">System Status Overview</h2>
+      <div className="flex-between">
+        <h2 className="page-title">System Status Overview</h2>
+        <button className="btn btn-primary" onClick={exportTasks}>Export Data (JSON)</button>
+      </div>
       
       <div className="stats-grid">
         <div className="stat-card glass-card">

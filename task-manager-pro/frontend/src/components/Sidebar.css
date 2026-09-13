@@ -70,8 +70,7 @@
   gap: 12px;
 }
 
-.theme-toggle-btn,
-.logout-btn {
+.theme-toggle-btn {
   display: flex;
   align-items: center;
   width: 100%;
@@ -92,16 +91,17 @@
   color: var(--text-main);
 }
 
-.theme-toggle-btn svg,
-.logout-btn svg {
+.theme-toggle-btn svg {
   margin-right: 12px;
 }
 
-.logout-btn {
-  color: var(--accent-danger);
-  background: rgba(239, 68, 68, 0.05);
+@media (max-width: 992px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
 }
 
-.logout-btn:hover {
-  background: rgba(239, 68, 68, 0.1);
-}

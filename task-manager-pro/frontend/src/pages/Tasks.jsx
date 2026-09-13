@@ -1,86 +1,79 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TaskCard from '../components/TaskCard';
+import { useTasks } from '../context/TaskContext';
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, loading, updateTask, deleteTask } = useTasks();
   const [filter, setFilter] = useState('All'); // All, High, Medium, Low
-  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState('createdAt'); // createdAt, dueDate, priority
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const fetchTasks = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/tasks', {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}` }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setTasks(data);
-      }
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const toggleStatus = async (task) => {
+  const toggleStatus = (task) => {
     const newStatus = task.status === 'Completed' ? 'Pending' : 'Completed';
-    try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${task._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}`
-        },
-        body: JSON.stringify({ status: newStatus })
-      });
-      if (res.ok) {
-        fetchTasks();
-      }
-    } catch (error) {
-      console.error('Error updating task status:', error);
-    }
+    updateTask(task._id, { status: newStatus });
   };
 
-  const deleteTask = async (id) => {
+  const handleDelete = (id) => {
     if (!window.confirm('Confirm deletion of task?')) return;
-    try {
-      const res = await fetch(`http://localhost:5000/api/tasks/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('dummy-auth-token')}` }
-      });
-      if (res.ok) {
-        fetchTasks();
-      }
-    } catch (error) {
-      console.error('Error deleting task:', error);
-    }
+    deleteTask(id);
   };
 
   const filteredTasks = tasks.filter(t => {
     if (t.status === 'Completed') return false; // Show only pending in this view
+    if (search && !t.description.toLowerCase().includes(search.toLowerCase())) return false;
     if (filter === 'All') return true;
     return t.priority === filter;
+  }).sort((a, b) => {
+    if (sortBy === 'priority') {
+      const p = { 'High': 3, 'Medium': 2, 'Low': 1 };
+      return (p[b.priority] || 0) - (p[a.priority] || 0);
+    }
+    if (sortBy === 'dueDate') {
+      if (!a.dueDate) return 1;
+      if (!b.dueDate) return -1;
+      return new Date(a.dueDate) - new Date(b.dueDate);
+    }
+    return new Date(b.createdAt) - new Date(a.createdAt);
   });
 
   return (
     <div className="page-container">
-      <div className="flex-between">
+      <div className="flex-between mb-4">
         <h2 className="page-title">Active Tasks</h2>
-        <div className="filter-group">
-          {['All', 'High', 'Medium', 'Low'].map(f => (
-            <button 
-              key={f}
-              className={`filter-btn ${filter === f ? 'active' : ''}`}
-              onClick={() => setFilter(f)}
-            >
-              {f}
-            </button>
-          ))}
+        
+        <div className="actions-group flex items-center gap-4">
+          <input 
+            type="text" 
+            placeholder="Search tasks..." 
+            className="form-input" 
+            style={{ width: 'auto', padding: '0.4rem 1rem' }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          
+          <select 
+            className="form-input" 
+            style={{ width: 'auto', padding: '0.4rem 1rem' }}
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="createdAt">Newest</option>
+            <option value="dueDate">Due Date</option>
+            <option value="priority">Priority</option>
+          </select>
         </div>
+      </div>
+      
+      <div className="filter-group mb-4">
+        {['All', 'High', 'Medium', 'Low'].map(f => (
+          <button 
+            key={f}
+            className={`filter-btn ${filter === f ? 'active' : ''}`}
+            onClick={() => setFilter(f)}
+          >
+            {f}
+          </button>
+        ))}
       </div>
 
       {loading ? (
@@ -95,7 +88,7 @@ const Tasks = () => {
                 key={task._id} 
                 task={task} 
                 onStatusToggle={toggleStatus}
-                onDelete={deleteTask}
+                onDelete={handleDelete}
               />
             ))
           )}
