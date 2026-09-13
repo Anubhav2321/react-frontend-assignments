@@ -3,7 +3,7 @@ import { Search } from 'lucide-react';
 import ProductCard from './ProductCard';
 import './ProductList.css';
 
-const CATEGORIES = ['All', 'Watches', 'Electronics', 'Accessories', 'Bags', 'Shoes'];
+const CATEGORIES = ['All', 'Watches', 'Electronics', 'Accessories', 'Bags', 'Shoes', 'Fashion', 'Beauty', 'Home', 'Sports'];
 
 const DEFAULT_PRODUCTS = [
   {
@@ -38,7 +38,7 @@ const DEFAULT_PRODUCTS = [
     name: 'T Shirt for Man',
     brand: 'WROGN',
     price: 399,
-    category: 'T Shirt',
+    category: 'Fashion',
     image: 'https://m.media-amazon.com/images/I/61xTfKaqUlL._SY879_.jpg',
     specs: ['UV Protection', 'Gold Rims', 'Designer'],
   },
@@ -47,7 +47,7 @@ const DEFAULT_PRODUCTS = [
     name: 'T Shirt for Man',
     brand: 'Lymio Polo',
     price: 658,
-    category: 'T Shirt',
+    category: 'Fashion',
     image: 'https://m.media-amazon.com/images/I/61gGFX2urpL._SX679_.jpg',
     specs: ['UV Protection', 'Gold Rims', 'Designer'],
   },
@@ -56,9 +56,35 @@ const DEFAULT_PRODUCTS = [
     name: 'Samsung Galaxy Z Fold8 Ultra 5G',
     brand: 'Samsung',
     price: 194999,
-    category: 'Smartphone with Galaxy AI ',
+    category: 'Electronics',
     image: 'https://m.media-amazon.com/images/I/71Ocpa1KaiL._SX679_.jpg',
-    specs: ['UV Protection', 'Gold Rims', 'Designer'],
+    specs: ['Mechanical', 'Gold Rims', 'Designer'],
+  },
+    {
+    id: 7,
+    name: 'HP Omnibook 3 Intel Core Ultra 5 Series Laptop',
+    brand: 'HP Omnibook',
+    price: 119990,
+    category: 'Electronics',
+    image: 'https://rukminim1.flixcart.com/image/1536/1536/xif0q/computer/l/w/f/-original-imahr5dsvvjt5msy.jpeg?q=90',
+    specs: ['Glacier Silver Cover & Keyboard Frame, Glacier Gray Base, 1.4 kg, With MS Office)'],
+  },  {
+    id: 8,
+    name: 'SONY PlayStation5 Console (slim)',
+    brand: 'SONY',
+    price: 54990,
+    category: 'Electronics ',
+    image: 'https://rukminim1.flixcart.com/image/1536/1536/xif0q/gamingconsole/j/g/z/-enriched-transparent-original-imahhgzqcjwdxgzx.png?q=90',
+    specs: ['Mechanical', 'Gold Rims', 'Designer'],
+  },
+    {
+    id: 7,
+    name: 'Apple Watch SE 3(2025) GPS 40mm Starlight Aluminium Case',
+    brand: 'Apple',
+    price: 25900,
+    category: 'Watches',
+    image: 'https://rukminim1.flixcart.com/image/1536/1536/xif0q/smartwatch/q/6/g/-original-imahftggbrhpfrha.jpeg?q=90',
+    specs: ['Mechanical', 'Gold Rims', 'Designer'],
   },
  
 ];

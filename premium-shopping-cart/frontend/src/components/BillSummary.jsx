@@ -24,29 +24,33 @@ const BillSummary = () => {
 
     setValidating(true);
     try {
-      const res = await fetch('http://localhost:5000/api/validate-coupon', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: codeToApply })
-      });
-      
-      const data = await res.json();
-      
-      if (data.valid) {
-        applyCoupon(codeToApply.toUpperCase(), data.discountPercentage);
-        toast.success(data.message, {
-          style: { background: '#1f2833', color: '#0ff', border: '1px solid #0ff' },
-          iconTheme: { primary: '#0ff', secondary: '#000' }
-        });
-      } else {
-        toast.error(data.message, {
-          style: { background: '#1f2833', color: '#f0f', border: '1px solid #f0f' },
-          iconTheme: { primary: '#f0f', secondary: '#000' }
-        });
-      }
+      // Mock validation since backend doesn't exist yet
+      setTimeout(() => {
+        let valid = false;
+        let discountPercentage = 0;
+        let message = '';
+        
+        if (codeToApply === 'NEON20') { valid = true; discountPercentage = 20; message = '20% OFF Applied!'; }
+        else if (codeToApply === 'CYBER15') { valid = true; discountPercentage = 15; message = '15% OFF Applied!'; }
+        else if (codeToApply === 'SPEED10') { valid = true; discountPercentage = 10; message = '10% OFF Applied!'; }
+        else { message = 'Invalid Coupon Code'; }
+
+        if (valid) {
+          applyCoupon(codeToApply.toUpperCase(), discountPercentage);
+          toast.success(message, {
+            style: { background: '#1f2833', color: '#0ff', border: '1px solid #0ff' },
+            iconTheme: { primary: '#0ff', secondary: '#000' }
+          });
+        } else {
+          toast.error(message, {
+            style: { background: '#1f2833', color: '#f0f', border: '1px solid #f0f' },
+            iconTheme: { primary: '#f0f', secondary: '#000' }
+          });
+        }
+        setValidating(false);
+      }, 500);
     } catch (err) {
       toast.error('Failed to validate coupon.');
-    } finally {
       setValidating(false);
     }
   };

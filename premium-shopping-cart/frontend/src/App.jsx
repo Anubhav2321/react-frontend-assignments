@@ -6,14 +6,14 @@ import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
 import OrdersView from './components/OrdersView';
 import CartDrawer from './components/CartDrawer';
-import AddProductModal from './components/AddProductModal';
+
 import './index.css';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [currentView, setCurrentView] = useState('home'); // 'home', 'product', 'orders'
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isAddProductOpen, setIsAddProductOpen] = useState(false);
+
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
@@ -73,17 +73,6 @@ function App() {
           }}
         />
 
-        <AddProductModal 
-          isOpen={isAddProductOpen} 
-          onClose={() => setIsAddProductOpen(false)} 
-        />
-        
-        <button 
-          className="admin-fab premium-btn" 
-          onClick={() => setIsAddProductOpen(true)}
-        >
-          + ADD PRODUCT
-        </button>
       </div>
     </CartProvider>
   );
