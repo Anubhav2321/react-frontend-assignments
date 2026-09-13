@@ -1,3 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* App-level minimal overrides — all main styles live in index.css */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
