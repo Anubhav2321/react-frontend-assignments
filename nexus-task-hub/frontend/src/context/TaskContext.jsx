@@ -10,7 +10,7 @@ export const TaskProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const { user } = useContext(AuthContext);
 
-  const API_URL = 'http://localhost:5000/api/tasks/';
+  const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/tasks/` : 'http://localhost:5000/api/tasks/';
 
   const getConfig = () => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';

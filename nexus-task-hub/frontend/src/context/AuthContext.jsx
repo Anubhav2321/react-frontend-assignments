@@ -19,7 +19,8 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserProfile = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/auth/me');
+      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const res = await axios.get(`${baseURL}/api/auth/me`);
       setUser(res.data);
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -31,7 +32,8 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password, rememberMe) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${baseURL}/api/auth/login`, { email, password });
       handleAuthSuccess(res.data, rememberMe);
       return { success: true };
     } catch (error) {
@@ -41,7 +43,8 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password, rememberMe) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password });
+      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${baseURL}/api/auth/register`, { name, email, password });
       handleAuthSuccess(res.data, rememberMe);
       return { success: true };
     } catch (error) {
@@ -51,7 +54,8 @@ export const AuthProvider = ({ children }) => {
 
   const googleLogin = async (credential, rememberMe) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/google', { credential });
+      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${baseURL}/api/auth/google`, { credential });
       handleAuthSuccess(res.data, rememberMe);
       return { success: true };
     } catch (error) {
