@@ -5,11 +5,12 @@ import {
   ListTodo, 
   CheckSquare, 
   PlusCircle, 
-  LogOut 
+  LogOut,
+  X
 } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { logout } = useContext(AuthContext);
 
   const navItems = [
@@ -20,12 +21,17 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-logo">
-        <div className="icon">
-          <ListTodo size={28} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="icon">
+            <ListTodo size={28} />
+          </div>
+          Nexus Tasks
         </div>
-        Nexus Tasks
+        <button className="close-sidebar-btn" onClick={onClose} aria-label="Close Sidebar">
+          <X size={24} />
+        </button>
       </div>
       
       <div className="nav-links">
@@ -35,6 +41,7 @@ const Sidebar = () => {
             to={item.path}
             end={item.path === '/tasks'}
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            onClick={onClose} // close sidebar when navigating on mobile
           >
             {item.icon}
             {item.name}

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { Moon, Sun, User } from 'lucide-react';
+import { Moon, Sun, User, Menu } from 'lucide-react';
 import Sidebar from './Sidebar';
 import { ThemeContext } from '../context/ThemeContext';
 import { AuthContext } from '../context/AuthContext';
@@ -9,6 +9,7 @@ const Layout = () => {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const { user } = useContext(AuthContext);
   const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -24,10 +25,29 @@ const Layout = () => {
 
   return (
     <div className="app-layout">
-      <Sidebar />
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="sidebar-overlay open" 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+      
       <div className="main-content">
         <header className="top-bar">
-          <h1 className="page-title">{getPageTitle()}</h1>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button 
+              className="menu-toggle-btn" 
+              onClick={() => setIsSidebarOpen(true)}
+              aria-label="Open Menu"
+            >
+              <Menu size={24} />
+            </button>
+            <h1 className="page-title">{getPageTitle()}</h1>
+          </div>
+          
           <div className="user-actions">
             <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}

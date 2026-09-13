@@ -55,7 +55,7 @@ const Dashboard = () => {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
     >
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+      <div className="stats-grid" style={{ marginBottom: '2rem' }}>
         {stats.map((stat, i) => (
           <div key={i} className="glass-panel" style={{ padding: '1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div style={{ padding: '1rem', borderRadius: '12px', background: `${stat.color}15`, color: stat.color }}>

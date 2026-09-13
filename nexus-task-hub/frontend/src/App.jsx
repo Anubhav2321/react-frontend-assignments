@@ -38,17 +38,21 @@ const AnimatedRoutes = () => {
   );
 };
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <TaskProvider>
-          <Router>
-            <AnimatedRoutes />
-          </Router>
-        </TaskProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <GoogleOAuthProvider clientId="822342760278-c6uu3b8asqdn1s2pfdecl02v9pv252rt.apps.googleusercontent.com">
+      <ThemeProvider>
+        <AuthProvider>
+          <TaskProvider>
+            <Router>
+              <AnimatedRoutes />
+            </Router>
+          </TaskProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </GoogleOAuthProvider>
   );
 }
 

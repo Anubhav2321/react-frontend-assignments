@@ -8,12 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for token in localStorage or sessionStorage
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    
     if (token) {
-      // In a real app, verify token with backend here
-      // For now, we simulate fetching user profile if token exists
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       fetchUserProfile();
     } else {
@@ -23,7 +19,6 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserProfile = async () => {
     try {
-      // We assume backend is running on 5000
       const res = await axios.get('http://localhost:5000/api/auth/me');
       setUser(res.data);
     } catch (error) {
@@ -54,9 +49,9 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const googleLogin = async (tokenId, rememberMe) => {
+  const googleLogin = async (credential, rememberMe) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/google', { tokenId });
+      const res = await axios.post('http://localhost:5000/api/auth/google', { credential });
       handleAuthSuccess(res.data, rememberMe);
       return { success: true };
     } catch (error) {
@@ -65,23 +60,37 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleAuthSuccess = (userData, rememberMe) => {
-    const { token, ...userProfile } = userData;
+    // fast-jwt backend returns accessToken and refreshToken
+    const token = userData.accessToken || userData.token;
+    
+    // We don't want to store tokens in the user profile state
+    const { accessToken, refreshToken, token: oldToken, ...userProfile } = userData;
     setUser(userProfile);
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     
     if (rememberMe) {
       localStorage.setItem('token', token);
+      if (userData.refreshToken) {
+         localStorage.setItem('refreshToken', userData.refreshToken);
+      }
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('refreshToken');
     } else {
       sessionStorage.setItem('token', token);
+      if (userData.refreshToken) {
+         sessionStorage.setItem('refreshToken', userData.refreshToken);
+      }
       localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
     }
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('refreshToken');
     delete axios.defaults.headers.common['Authorization'];
   };
 
