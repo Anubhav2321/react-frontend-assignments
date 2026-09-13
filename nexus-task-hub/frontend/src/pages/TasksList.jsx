@@ -20,7 +20,7 @@ const TasksList = ({ filter = 'all' }) => {
   const handleStatusToggle = (e, task) => {
     e.stopPropagation();
     const newStatus = task.status === 'Completed' ? 'Pending' : 'Completed';
-    updateTask(task._id, { status: newStatus });
+    updateTask(task.id, { status: newStatus });
   };
 
   const handleDelete = (e, id) => {
@@ -44,9 +44,9 @@ const TasksList = ({ filter = 'all' }) => {
       ) : (
         filteredTasks.map((task) => (
           <div 
-            key={task._id} 
+            key={task.id} 
             className="glass-panel task-card"
-            onClick={() => navigate(`/tasks/${task._id}`)}
+            onClick={() => navigate(`/tasks/${task.id}`)}
           >
             <div className="task-card-header">
               <span className={`badge ${task.priority.toLowerCase()}`}>
@@ -79,7 +79,7 @@ const TasksList = ({ filter = 'all' }) => {
                   <CheckCircle size={18} />
                 </button>
                 <button 
-                  onClick={(e) => handleDelete(e, task._id)}
+                  onClick={(e) => handleDelete(e, task.id)}
                   className="theme-toggle" 
                   title="Delete Task"
                   style={{ color: 'var(--danger)' }}

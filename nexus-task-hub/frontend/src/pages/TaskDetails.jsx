@@ -13,7 +13,7 @@ const TaskDetails = () => {
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    const task = tasks.find((t) => t._id === id);
+    const task = tasks.find((t) => t.id === id);
     if (task) {
       // format date for input field (YYYY-MM-DD)
       const formattedDate = new Date(task.dueDate).toISOString().split('T')[0];

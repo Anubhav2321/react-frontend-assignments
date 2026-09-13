@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
-import GoogleSignInButton from '../components/GoogleSignInButton';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -89,8 +89,7 @@ const Login = () => {
           <button type="submit" className="premium-button" disabled={loading}>
             {loading ? 'AUTHENTICATING...' : 'SIGN IN'}
           </button>
-          {/* GoogleSignInButton component */}
-          <GoogleSignInButton />
+
 
           <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.875rem' }}>
             <span style={{ color: 'var(--text-muted)' }}>Don't have an account? </span>

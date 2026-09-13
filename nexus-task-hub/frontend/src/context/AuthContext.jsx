@@ -1,105 +1,101 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 
 export const AuthContext = createContext();
+
+// Helper to get registered users from localStorage
+const getStoredUsers = () => {
+  try {
+    return JSON.parse(localStorage.getItem('nexus_users')) || [];
+  } catch {
+    return [];
+  }
+};
+
+// Helper to save registered users to localStorage
+const saveStoredUsers = (users) => {
+  localStorage.setItem('nexus_users', JSON.stringify(users));
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // On mount, restore session from storage
   useEffect(() => {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      fetchUserProfile();
-    } else {
-      setLoading(false);
+    const stored =
+      localStorage.getItem('nexus_currentUser') ||
+      sessionStorage.getItem('nexus_currentUser');
+    if (stored) {
+      try {
+        setUser(JSON.parse(stored));
+      } catch {
+        // Corrupted data — clear it
+        localStorage.removeItem('nexus_currentUser');
+        sessionStorage.removeItem('nexus_currentUser');
+      }
     }
+    setLoading(false);
   }, []);
 
-  const fetchUserProfile = async () => {
-    try {
-      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const res = await axios.get(`${baseURL}/api/auth/me`);
-      setUser(res.data);
-    } catch (error) {
-      console.error('Error fetching user profile:', error);
-      logout();
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const login = async (email, password, rememberMe) => {
-    try {
-      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const res = await axios.post(`${baseURL}/api/auth/login`, { email, password });
-      handleAuthSuccess(res.data, rememberMe);
-      return { success: true };
-    } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Login failed' };
+    const users = getStoredUsers();
+    const found = users.find(
+      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
+    );
+
+    if (!found) {
+      return { success: false, message: 'Invalid email or password' };
     }
+
+    const profile = { id: found.id, name: found.name, email: found.email };
+    setUser(profile);
+    persistSession(profile, rememberMe);
+    return { success: true };
   };
 
   const register = async (name, email, password, rememberMe) => {
-    try {
-      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const res = await axios.post(`${baseURL}/api/auth/register`, { name, email, password });
-      handleAuthSuccess(res.data, rememberMe);
-      return { success: true };
-    } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Registration failed' };
+    const users = getStoredUsers();
+
+    // Check if email already registered
+    if (users.some((u) => u.email.toLowerCase() === email.toLowerCase())) {
+      return { success: false, message: 'Email already registered' };
     }
+
+    const newUser = {
+      id: crypto.randomUUID(),
+      name,
+      email: email.toLowerCase(),
+      password,
+    };
+
+    users.push(newUser);
+    saveStoredUsers(users);
+
+    const profile = { id: newUser.id, name: newUser.name, email: newUser.email };
+    setUser(profile);
+    persistSession(profile, rememberMe);
+    return { success: true };
   };
 
-  const googleLogin = async (credential, rememberMe) => {
-    try {
-      const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-      const res = await axios.post(`${baseURL}/api/auth/google`, { credential });
-      handleAuthSuccess(res.data, rememberMe);
-      return { success: true };
-    } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Google Auth failed' };
-    }
-  };
-
-  const handleAuthSuccess = (userData, rememberMe) => {
-    // fast-jwt backend returns accessToken and refreshToken
-    const token = userData.accessToken || userData.token;
-    
-    // We don't want to store tokens in the user profile state
-    const { accessToken, refreshToken, token: oldToken, ...userProfile } = userData;
-    setUser(userProfile);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    
+  const persistSession = (profile, rememberMe) => {
+    const data = JSON.stringify(profile);
     if (rememberMe) {
-      localStorage.setItem('token', token);
-      if (userData.refreshToken) {
-         localStorage.setItem('refreshToken', userData.refreshToken);
-      }
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('refreshToken');
+      localStorage.setItem('nexus_currentUser', data);
+      sessionStorage.removeItem('nexus_currentUser');
     } else {
-      sessionStorage.setItem('token', token);
-      if (userData.refreshToken) {
-         sessionStorage.setItem('refreshToken', userData.refreshToken);
-      }
-      localStorage.removeItem('token');
-      localStorage.removeItem('refreshToken');
+      sessionStorage.setItem('nexus_currentUser', data);
+      localStorage.removeItem('nexus_currentUser');
     }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('refreshToken');
-    delete axios.defaults.headers.common['Authorization'];
+    localStorage.removeItem('nexus_currentUser');
+    sessionStorage.removeItem('nexus_currentUser');
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, googleLogin, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
 import PasswordStrength from '../components/PasswordStrength';
-import GoogleSignInButton from '../components/GoogleSignInButton';
+
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -97,8 +97,7 @@ const Register = () => {
           <button type="submit" className="premium-button" disabled={loading}>
             {loading ? 'PROCESSING...' : 'REGISTER'}
           </button>
-          
-          <GoogleSignInButton />
+
 
           <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.875rem' }}>
             <span style={{ color: 'var(--text-muted)' }}>Already have an account? </span>

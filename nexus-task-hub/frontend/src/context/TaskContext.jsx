@@ -1,8 +1,23 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import { AuthContext } from './AuthContext';
 
 export const TaskContext = createContext();
+
+// Helper to get tasks for a specific user from localStorage
+const getStoredTasks = (userId) => {
+  if (!userId) return [];
+  try {
+    return JSON.parse(localStorage.getItem(`nexus_tasks_${userId}`)) || [];
+  } catch {
+    return [];
+  }
+};
+
+// Helper to save tasks for a specific user to localStorage
+const saveStoredTasks = (userId, tasks) => {
+  if (!userId) return;
+  localStorage.setItem(`nexus_tasks_${userId}`, JSON.stringify(tasks));
+};
 
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
@@ -10,69 +25,49 @@ export const TaskProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const { user } = useContext(AuthContext);
 
-  const API_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/tasks/` : 'http://localhost:5000/api/tasks/';
-
-  const getConfig = () => {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token') || '';
-    return {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-  };
-
-  const fetchTasks = async () => {
-    if (!user) return;
-    try {
-      setLoading(true);
-      const res = await axios.get(API_URL, getConfig());
-      setTasks(res.data);
-      setError(null);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Error fetching tasks');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Load tasks when user changes
   useEffect(() => {
     if (user) {
-      fetchTasks();
+      const stored = getStoredTasks(user.id);
+      setTasks(stored);
+      setError(null);
     } else {
       setTasks([]);
     }
+    setLoading(false);
   }, [user]);
 
-  const addTask = async (taskData) => {
-    try {
-      const res = await axios.post(API_URL, taskData, getConfig());
-      setTasks([...tasks, res.data]);
-      return res.data;
-    } catch (err) {
-      setError(err.response?.data?.message || 'Error adding task');
-      throw err;
-    }
+  const fetchTasks = () => {
+    if (!user) return;
+    const stored = getStoredTasks(user.id);
+    setTasks(stored);
   };
 
-  const updateTask = async (id, taskData) => {
-    try {
-      const res = await axios.put(API_URL + id, taskData, getConfig());
-      setTasks(tasks.map((task) => (task._id === id ? res.data : task)));
-      return res.data;
-    } catch (err) {
-      setError(err.response?.data?.message || 'Error updating task');
-      throw err;
-    }
+  const addTask = (taskData) => {
+    const newTask = {
+      ...taskData,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+    };
+    const updated = [...tasks, newTask];
+    setTasks(updated);
+    saveStoredTasks(user.id, updated);
+    return newTask;
   };
 
-  const deleteTask = async (id) => {
-    try {
-      await axios.delete(API_URL + id, getConfig());
-      setTasks(tasks.filter((task) => task._id !== id));
-    } catch (err) {
-      setError(err.response?.data?.message || 'Error deleting task');
-      throw err;
-    }
+  const updateTask = (id, taskData) => {
+    const updated = tasks.map((task) =>
+      task.id === id ? { ...task, ...taskData } : task
+    );
+    setTasks(updated);
+    saveStoredTasks(user.id, updated);
+    return updated.find((t) => t.id === id);
+  };
+
+  const deleteTask = (id) => {
+    const updated = tasks.filter((task) => task.id !== id);
+    setTasks(updated);
+    saveStoredTasks(user.id, updated);
   };
 
   return (
