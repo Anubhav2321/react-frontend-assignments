@@ -135,7 +135,7 @@ export default function App() {
       >
         <div className="text-5xl md:text-7xl font-bold tracking-tighter drop-shadow-[0_0_20px_rgba(0,242,254,0.6)] glitch-text">
           <span className="text-white">
-            <span className="text-primary">&lt;</span>Anubhav<span className="text-accent">/&gt;</span>
+            <span className="text-primary">&lt;</span>suchandra<span className="text-accent">/&gt;</span>
           </span>
         </div>
       </div>

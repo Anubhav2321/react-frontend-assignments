@@ -36,7 +36,7 @@ export default function Navbar({ isDarkMode, toggleTheme, activeSection }) {
               <div className="flex items-center justify-between h-16 md:h-20">
                   <div className="flex-shrink-0 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
                       <span className="text-2xl md:text-3xl font-bold tracking-tighter text-slate-900 dark:text-white">
-                          <span className="text-primary">&lt;</span>Anubhav<span className="text-accent">/&gt;</span>
+                          <span className="text-primary">&lt;</span>suchandra<span className="text-accent">/&gt;</span>
                       </span>
                   </div>
                   

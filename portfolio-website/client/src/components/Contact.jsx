@@ -59,7 +59,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="text-xs text-slate-600 dark:text-slate-400 mb-0.5">Email</p>
-                                    <a href="mailto:anubhavsamanta2005@gmail.com" className="text-sm md:text-base font-medium text-slate-900 dark:text-white hover:text-primary transition-colors break-all">anubhavsamanta2005@gmail.com</a>
+                                    <a href="mailto:suchandasaha075@gmail.com" className="text-sm md:text-base font-medium text-slate-900 dark:text-white hover:text-primary transition-colors break-all">suchandasaha075@gmail.com</a>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ export default function Contact() {
                             <a href="https://www.linkedin.com/in/anubhav-samanta-187549379?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex items-center gap-2 text-sm md:text-base text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
                                 <i className="fab fa-linkedin text-lg"></i> LinkedIn
                             </a>
-                            <a href="mailto:anubhavsamanta2005@gmail.com" aria-label="Email" className="flex items-center gap-2 text-sm md:text-base text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
+                            <a href="mailto:suchandasaha075@gmail.com" aria-label="Email" className="flex items-center gap-2 text-sm md:text-base text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">
                                 <i className="fas fa-envelope text-lg"></i> Email
                             </a>
                             <a href="https://www.instagram.com/r.d.x___anubhav" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center gap-2 text-sm md:text-base text-slate-600 dark:text-slate-400 hover:text-primary transition-colors">

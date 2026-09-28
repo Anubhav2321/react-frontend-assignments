@@ -11,7 +11,7 @@ export default function Hero() {
                     <span className="text-gradient">Future Web</span>
                 </h1>
                 <p className="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-lg mx-auto md:mx-0 animate-hero-stagger font-light">
-                    I'm Anubhav Samanta, a Full Stack Developer & BCA student fusing cutting-edge technology with immersive design.
+                    I'm suchandra saha, a Full Stack Developer & BCA student fusing cutting-edge technology with immersive design.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start animate-hero-stagger">
                     <a href="#projects" className="px-8 py-3.5 md:py-4 rounded-full bg-primary text-dark font-bold hover:shadow-neon hover:-translate-y-1 transition-transform duration-300 text-center flex items-center justify-center gap-2 relative z-50 inline-flex">
@@ -31,9 +31,9 @@ export default function Hero() {
                 
                 <div className="hero-img-container w-full max-w-[280px] sm:max-w-sm md:max-w-2xl">
                     <img 
-                        src="assets/images/profile-cutout.png" 
+                        src="/profile-cutout.png" 
                         onError={(e) => { e.target.src='WhatsApp%20Image%202025-11-19%20at%2010.34.19%20PM.jpeg' }}
-                        alt="Anubhav Samanta" 
+                        alt="suchandra saha" 
                         className="hero-img-custom animate-hero-image transform-gpu w-auto h-auto max-h-[100%] object-contain relative z-10 opacity-0"
                     />
                     
