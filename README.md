@@ -3,6 +3,7 @@
   <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="Express.js" />
   <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
   
   <h1>🚀 Advanced React Frontend Development</h1>
   <p><i>A curated collection of professional-grade React applications demonstrating modern frontend architecture, state management, and full-stack integration.</i></p>
@@ -14,7 +15,7 @@
 
 Welcome to the **React Frontend Development Assignments** repository. This collection showcases a series of practical, beautifully crafted React applications developed as part of an advanced coursework. Each project is engineered to highlight specific modern web development concepts, ranging from foundational component architecture to complex global state management and secure authentication. 
 
-The primary goal of this repository is to demonstrate a progressive learning curve, moving from static UI development to dynamic, data-driven Single Page Applications (SPAs).
+The primary goal of this repository is to demonstrate a progressive learning curve, moving from static UI development to dynamic, data-driven Single Page Applications (SPAs) and full-stack architectures.
 
 ---
 
@@ -23,208 +24,110 @@ The primary goal of this repository is to demonstrate a progressive learning cur
 ### 1️⃣ Personal Portfolio (`portfolio-website`)
 
 **Project Overview:**
-A responsive, visually striking personal portfolio website developed using React and JSX. This project serves as a digital resume and a comprehensive showcase of modern UI/UX principles and component-based design. It is built entirely from scratch without relying on heavy external CSS frameworks (like Bootstrap or Tailwind), emphasizing a deep understanding of core web technologies.
+A responsive, visually striking personal portfolio website developed using React and JSX. This project serves as a digital resume and a comprehensive showcase of modern UI/UX principles and component-based design.
 
-**Core Learning Objectives:**
-- **Component Architecture:** Mastering React component structure by breaking down a single page into modular pieces (Headers, Footers, Hero sections).
-- **Responsive Styling:** Implementing mobile-first responsive design principles using modern CSS Grid and Flexbox.
-- **UI/UX Principles:** Understanding how to structure information hierarchically for maximum user engagement.
-
-**Technical Highlights:**
-- **Mobile-first approach:** Ensures perfect rendering on devices of all screen sizes.
-- **Semantic HTML5:** Improves overall accessibility (a11y) and SEO.
 - **Tech Stack:** React, JSX, HTML5, CSS3, JavaScript.
-
-**Key Features & Functionality:**
-- **Dynamic Navigation:** Sticky navigation bar with smooth section scrolling.
-- **Dedicated Layouts:** Sections for 'About Me', 'Education', 'Skills', and 'Experience'.
-- **Interactive UI:** Smooth hover effects, CSS transitions, and an interactive Contact form UI.
-
-**Real-World Application:**
-Provides a foundational understanding of how to build and deploy static landing pages and promotional sites—a crucial skill for freelance web developers.
-
+- **Key Features:** Mobile-first approach, smooth scrolling, interactive UI, contact form.
+- 🔗 **Links:** [📂 Source Code](./portfolio-website) | [🌐 Live Demo](#)
 
 ---
 
 ### 2️⃣ Student Information Management (`student-management-system`)
 
 **Project Overview:**
-A comprehensive student information portal that displays detailed student profiles. This project focuses heavily on how data flows through a React application, moving away from hardcoded HTML into dynamic array mapping.
+A comprehensive student information portal that displays detailed student profiles. This project focuses heavily on how data flows through a React application using dynamic array mapping.
 
-**Core Learning Objectives:**
-- **Props & Data Flow:** Deep dive into React `props` and unidirectional (parent-to-child) data communication.
-- **Component Reusability:** Building highly reusable UI components, such as generic "Profile Cards".
-- **Data Manipulation:** Implementing client-side data manipulation and sorting algorithms based on user input.
-
-**Technical Highlights:**
-- **Dynamic Data Rendering:** Mapping over complex JSON data structures to render UI dynamically.
-- **Sorting Logic:** Custom JavaScript sorting functions integrated directly into React's render cycle.
 - **Tech Stack:** React, Node.js, Express.js.
-
-**Key Features & Functionality:**
-- **Dynamic Student List:** Renders dozens of students efficiently from an array of objects.
-- **Custom Student Cards:** Displays intricate details including Name, Roll Number, Department, Semester, and Avatar images.
-- **Interactive Sorting:** Users can click to rank the student list dynamically by their CGPA (Highest to Lowest, etc.).
-
-**Real-World Application:**
-Teaches the core mechanics needed to build directory sites, e-commerce product listings, or any application that displays large lists of repeated data.
+- **Key Features:** Unidirectional data flow, reusable profile cards, client-side sorting logic.
+- 🔗 **Links:** [📂 Source Code](./student-management-system) | [🌐 Live Demo](#)
 
 ---
 
 ### 3️⃣ Employee Directory (`Employee Directory`)
 
 **Project Overview:**
-An interactive Employee Directory application that acts as a fully functional dashboard. This project is a masterclass in React State and Event Handling, introducing the concept of mutating data in real-time based on user actions.
+An interactive Employee Directory application that acts as a fully functional dashboard. This project is a masterclass in React State and Event Handling, mutating data in real-time.
 
-**Core Learning Objectives:**
-- **Local State Management:** Managing complex, changing data using the `useState` hook.
-- **Event Handling:** Handling form submissions, keyboard inputs, and button clicks.
-- **Conditional Rendering:** Showing or hiding UI elements (like modals or warning messages) based on current state variables.
-
-**Technical Highlights:**
-- **In-Memory CRUD:** Full Create, Read, Update, and Delete capabilities handled entirely on the client side.
-- **Live Filtering:** Instant UI updates based on search query strings.
 - **Tech Stack:** React, useState, Event Handling, CSS.
-
-**Key Features & Functionality:**
-- **Form Integration:** Robust forms to Add new employees or Edit existing records.
-- **Real-time Search:** A search bar that filters the employee list instantly by name as the user types.
-- **Department Filtering:** Dropdown filters to view employees belonging only to specific Departments (e.g., HR, Engineering).
-- **Dashboard Statistics:** Real-time metrics showing total employee count and department distributions.
-
-**Real-World Application:**
-The foundation for building internal company tools, admin panels, and CRM (Customer Relationship Management) dashboards.
+- **Key Features:** In-memory CRUD, live search filtering, department categorization.
+- 🔗 **Links:** [📂 Source Code](./Employee%20Directory) | [🌐 Live Demo](#)
 
 ---
 
 ### 4️⃣ Weather Dashboard (`weather-dashboard`)
 
 **Project Overview:**
-A dynamic weather dashboard integrating real-time meteorological data via the OpenWeatherMap API. This project bridges the gap between the frontend UI and third-party backend services over the internet.
+A dynamic weather dashboard integrating real-time meteorological data via the OpenWeatherMap API.
 
-**Core Learning Objectives:**
-- **Asynchronous JavaScript:** Mastering network requests using `async/await` and the Fetch API.
-- **Side Effects:** Managing side effects in React using the `useEffect` hook (e.g., fetching data when the component loads).
-- **Error Boundaries:** Gracefully handling API loading states, timeout errors, and invalid user inputs.
-
-**Technical Highlights:**
-- **REST API Integration:** Parsing and utilizing complex JSON payloads from external servers.
-- **Environment Variables:** Securely storing API keys locally using `.env` files.
 - **Tech Stack:** React, Node.js, OpenWeatherMap API, Fetch API, useEffect.
-
-**Key Features & Functionality:**
-- **Live City Search:** Dynamic search functionality querying the API for specific global locations.
-- **Real-Time Metrics:** Displays live Temperature, Humidity, Wind Speed, and dynamic Weather Icons based on current conditions.
-- **Astronomical Data:** Calculates and displays local Sunrise & Sunset times.
-- **UX Enhancements:** Custom loading spinners and friendly error messages for "City Not Found".
-
-**Real-World Application:**
-Essential training for building modern apps that rely on external data sources (like stock tickers, news aggregators, or social media feeds).
+- **Key Features:** Live city search, real-time metrics, dynamic weather icons, error handling.
+- 🔗 **Links:** [📂 Source Code](./weather-dashboard) | [🌐 Live Demo](#)
 
 ---
 
 ### 5️⃣ Premium Online Shopping Cart (`premium-shopping-cart`)
 
 **Project Overview:**
-A sophisticated e-commerce cart application. This is one of the more advanced projects, designed to solve the problem of "prop drilling" by handling complex global state that needs to be accessed by deeply nested components across the application.
+A sophisticated e-commerce cart application designed to solve "prop drilling" by handling complex global state via the Context API and `useReducer`.
 
-**Core Learning Objectives:**
-- **Context API:** Using React Context to create a global state accessible from anywhere in the component tree.
-- **Complex State Logic:** Managing complex state transitions and business logic using the `useReducer` hook (similar to Redux).
-- **E-commerce Architecture:** Structuring a modern e-commerce application UI.
-
-**Technical Highlights:**
-- **Global State Management:** Seamlessly sharing cart data between the Product List, the Header (cart icon), and the Checkout Drawer.
-- **Mathematical Logic:** Real-time calculation of taxes, subtotals, and coupon deductions.
 - **Tech Stack:** React, Context API, useReducer, Node.js, Express.js.
-
-**Key Features & Functionality:**
-- **Cart Interactions:** Add to Cart, Remove Item, and dynamic quantity update controls.
-- **Inventory Limits:** Prevents users from adding more items than are supposedly in stock.
-- **Financial Calculations:** Real-time Grand Total calculations including automated GST (tax) additions.
-- **Coupon System:** Logic for applying valid text-based promo codes for percentage discounts.
-- **Sleek UI:** Smooth, animated slide-out cart drawer interface.
-
-**Real-World Application:**
-Provides the exact architecture needed to build frontend interfaces for platforms like Shopify, Amazon, or any digital storefront.
+- **Key Features:** Real-time tax & total calculations, inventory limits, coupon system, slide-out drawer.
+- 🔗 **Links:** [📂 Source Code](./premium-shopping-cart) | [🌐 Live Demo](#)
 
 ---
 
-### 6️⃣ Task Manager with Routing (`nexus-task-hub`)
+### 6️⃣ Task Hub (`nexus-task-hub`)
 
 **Project Overview:**
-A powerful Single Page Application (SPA) for task management. This project moves beyond single-view applications and introduces client-side routing to manage multiple distinct "pages" and URLs without ever refreshing the browser.
+A powerful Single Page Application (SPA) for task management featuring client-side routing, JWT-based authentication, and a secure backend.
 
-**Core Learning Objectives:**
-- **Client-Side Routing:** Implementing the `react-router-dom` library to intercept URL changes and swap components.
-- **Dynamic Routing:** Using URL Parameters (e.g., `/tasks/:id`) to fetch and render dynamic views.
-- **MERN Integration:** Building full-stack CRUD features connected to a real MongoDB database via an Express backend.
-
-**Technical Highlights:**
-- **Nested Navigation:** Complex UI structures where only parts of the screen re-render upon navigation.
-- **Database Connectivity:** Storing tasks permanently in a NoSQL database.
-- **Tech Stack:** React, React Router DOM, Node.js, Express.js, MongoDB.
-
-**Key Features & Functionality:**
-- **Interactive Dashboard:** A high-level overview showing upcoming deadlines and task metrics.
-- **Detailed Task List:** Displays Priority (High/Medium/Low), Category, Due Date, and Completion Status.
-- **Dynamic Views:** Dedicated URLs for adding new tasks, editing existing ones, and viewing specific task details.
-- **Smart Filtering:** Options to filter out completed tasks or view tasks by specific categories.
-
-**Real-World Application:**
-The standard architecture for building complex web applications like Jira, Trello, or customized productivity software.
+- **Tech Stack:** React, React Router DOM, Context API, Node.js, Express.js, MongoDB, JWT.
+- **Key Features:** Protected routes, complete auth cycle, interactive dashboard, smart filtering.
+- 🔗 **Links:** [📂 Source Code](./nexus-task-hub) | [🌐 Live Demo](#)
 
 ---
 
-### 7️⃣ Authentication System (`nexus-task-hub`)
+### 7️⃣ Expense Tracker Pro (`expense-tracker-pro`)
 
 **Project Overview:**
-A secure JWT-based authentication system seamlessly integrated into the Task Manager application. This project focuses entirely on application security, session management, and protecting user data from unauthorized access.
+A professional-grade financial tracking SPA focused on data visualization and persistence, allowing users to visually analyze their transactions.
 
-**Core Learning Objectives:**
-- **Authentication Flows:** Implementing secure JSON Web Token (JWT) login and registration flows.
-- **Data Security:** Hashing passwords securely on the backend using `bcryptjs` before storing them in the database.
-- **Route Protection:** Creating Higher-Order Components (HOCs) to protect specific React Router routes and redirect unauthorized users.
-
-**Technical Highlights:**
-- **Token Management:** Securely storing and attaching JWTs to HTTP Authorization headers for API requests.
-- **Session Persistence:** Utilizing browser APIs to keep users logged in across page refreshes.
-- **Tech Stack:** React, Context API, Node.js, Express.js, bcryptjs, jsonwebtoken.
-
-**Key Features & Functionality:**
-- **Full Auth Cycle:** Complete Login, Registration, and secure Logout functionality.
-- **Protected Dashboard:** The entire task management suite is locked behind an authentication wall.
-- **Session Persistence:** Remembers users using `localStorage` / `sessionStorage`.
-- **UI Feedback:** Real-time password strength meters during signup and robust form validation errors.
-
-**Real-World Application:**
-An absolute necessity for any application that handles private user data, encompassing 90% of modern SaaS (Software as a Service) platforms.
-
----
-
-### 8️⃣ Expense Tracker Pro (`expense-tracker-pro`)
-
-**Project Overview:**
-A professional-grade financial tracking SPA focused heavily on data visualization and persistence. This application allows users to record, categorize, and visually analyze their financial transactions over time, providing immediate graphical feedback.
-
-**Core Learning Objectives:**
-- **Data Visualization:** Integrating complex third-party charting libraries (`Recharts`) into a React ecosystem.
-- **Data Transformation:** Converting raw transaction data into formatted datasets required by charting libraries.
-- **Complex UI Forms:** Handling multiple input types (dates, numbers, text, selects) via Controlled Components.
-
-**Technical Highlights:**
-- **Interactive Charts:** High-performance SVG-based charts that re-render instantly when data changes.
-- **Data Exporting:** Generating downloadable files directly from the browser's memory.
 - **Tech Stack:** React, Recharts, Node.js, Express.js, MongoDB.
+- **Key Features:** Interactive SVG charts, advanced filtering, CSV data exporting.
+- 🔗 **Links:** [📂 Source Code](./expense-tracker-pro) | [🌐 Live Demo](#)
 
-**Key Features & Functionality:**
-- **Visual Analytics:** Interactive Line charts (expense trends), Bar charts (income vs expense), and Pie charts (category breakdowns).
-- **Transaction Management:** Detailed forms to log daily expenses with timestamps and categories.
-- **Advanced Filtering:** View monthly financial summaries or filter transactions by specific categories (Food, Transport, Utilities).
-- **Export Capabilities:** Ability to export the entire transaction history directly to a CSV file for Excel/Sheets.
+---
 
-**Real-World Application:**
-Teaches the skills required to build FinTech applications, banking dashboards, analytics platforms, and reporting tools.
+### 8️⃣ Blog Application (`Blog Application using CRUD`)
+
+**Project Overview:**
+A full-stack CRUD application allowing users to create, read, update, and delete blog posts. Demonstrates robust RESTful API integration and MERN stack capabilities.
+
+- **Tech Stack:** React, Node.js, Express.js, MongoDB.
+- **Key Features:** Complete blog management, frontend-backend communication, dynamic content rendering.
+- 🔗 **Links:** [📂 Source Code](./Blog%20Application%20using%20CRUD) | [🌐 Live Demo](#)
+
+---
+
+### 9️⃣ Movie Search App (`Movie-Search-App`)
+
+**Project Overview:**
+A modern, Vite-powered React application that integrates with a movie database API to let users search for movies, view details, and explore trending films.
+
+- **Tech Stack:** React, Vite, React Router DOM, Lucide Icons.
+- **Key Features:** API integration, dynamic routing, fast performance, modern UI components.
+- 🔗 **Links:** [📂 Source Code](./Movie-Search-App) | [🌐 Live Demo](#)
+
+---
+
+### 🔟 Task Manager Pro (`task-manager-pro`)
+
+**Project Overview:**
+A comprehensive task management application featuring a dedicated frontend and backend structure. Focuses on advanced state management and full-stack architecture.
+
+- **Tech Stack:** React, Node.js, Express.js, MongoDB.
+- **Key Features:** Advanced state management, component composition, robust backend logic.
+- 🔗 **Links:** [📂 Source Code](./task-manager-pro) | [🌐 Live Demo](#)
 
 ---
 
@@ -232,13 +135,12 @@ Teaches the skills required to build FinTech applications, banking dashboards, a
 
 | Category | Technologies |
 | :--- | :--- |
-| **Frontend Framework** | React.js (v18+), JSX |
+| **Frontend Framework** | React.js (v18+), JSX, Vite |
 | **Routing & State** | React Router DOM, Context API, useReducer, Custom Hooks |
 | **Backend API** | Node.js, Express.js |
 | **Database** | MongoDB, Mongoose ODM |
-| **Styling & UI** | CSS3, CSS Grid/Flexbox, Recharts (Data Viz) |
+| **Styling & UI** | CSS3, CSS Grid/Flexbox, Recharts, Lucide Icons |
 | **Security & Auth**| JSON Web Tokens (JWT), bcryptjs |
-| **Third-Party Services**| OpenWeatherMap REST API |
 
 ---
 
@@ -246,12 +148,15 @@ Teaches the skills required to build FinTech applications, banking dashboards, a
 
 ```text
 📦 react-frontend-assignments
+ ┣ 📂 Blog Application using CRUD # Full-stack Blog System (MERN)
  ┣ 📂 Employee Directory          # React State & Event Handling
+ ┣ 📂 Movie-Search-App            # Vite, React Router, API Integration
  ┣ 📂 expense-tracker-pro         # Data Visualization & SPA
  ┣ 📂 nexus-task-hub              # Routing, CRUD & JWT Authentication
  ┣ 📂 portfolio-website           # Component-based Architecture
  ┣ 📂 premium-shopping-cart       # Context API & useReducer
  ┣ 📂 student-management-system   # Props & Reusable Components
+ ┣ 📂 task-manager-pro            # Advanced Task Management (Frontend/Backend)
  ┣ 📂 weather-dashboard           # API Integration & Async/Await
  ┗ 📜 README.md                   # Project Documentation
 ```
@@ -260,49 +165,56 @@ Teaches the skills required to build FinTech applications, banking dashboards, a
 
 ## 🚀 Getting Started & Installation
 
-To explore any of these projects locally on your machine, follow these steps:
+To run these projects on your local machine, follow these easy steps:
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/Anubhav2321/react-frontend-assignments.git
-    cd react-frontend-assignments
-    ```
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your device.
 
-2.  **Navigate to a specific project directory:**
-    ```bash
-    cd <project-folder-name>
-    ```
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/Anubhav2321/react-frontend-assignments.git
+cd react-frontend-assignments
+```
 
-3.  **Install dependencies:**
-    *   *Note: For projects with separate backend and frontend folders (like `nexus-task-hub`), you will need to open two terminal windows and install dependencies in both folders.*
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
+### Step 2: Navigate to a Project
+Choose a project you'd like to explore and navigate into its folder:
+```bash
+cd <project-folder-name>
+# Example: cd Movie-Search-App
+```
 
-4.  **Configure Environment Variables (If Applicable):**
-    *   Projects connecting to APIs or databases (like `weather-dashboard` or `nexus-task-hub`) require a `.env` file. 
-    *   Duplicate the provided `.env.example` file, rename it to `.env`, and insert your own API keys or local MongoDB URI string.
+### Step 3: Install Dependencies
+Run the following command to install the required packages:
+```bash
+npm install
+```
+> **Note for Full-Stack Projects:** For projects with separate `frontend` and `backend` directories (like `task-manager-pro` or `Blog Application using CRUD/blog-crud-app`), you will need to open two terminal windows, navigate into each folder, and run `npm install` in both.
 
-5.  **Run the development server:**
-    ```bash
-    npm start
-    # or
-    npm run dev
-    ```
-    *The application should now be running on `http://localhost:3000` or `http://localhost:5173` (depending on the build tool).*
+### Step 4: Configure Environment Variables
+If a project interacts with an external API or database (e.g., `weather-dashboard`, `nexus-task-hub`), it may require environment variables:
+1. Locate the `.env.example` file in the project folder.
+2. Rename it to `.env`.
+3. Add your specific API keys or database URI (like MongoDB).
+
+### Step 5: Start the Application
+Run the development server:
+```bash
+npm run dev
+# or 
+npm start
+```
+The application will usually be available at `http://localhost:5173` (Vite) or `http://localhost:3000` (Create React App).
 
 ---
 
 ## 👨‍💻 About the Author
 
 **Anubhav**  
-Passionate Frontend Developer focusing on React and modern web architectures. Dedicated to building clean, scalable, and user-centric web applications.
+Passion-driven Frontend Developer focusing on React and modern web architectures. Dedicated to building clean, scalable, and user-centric web applications.
 
 *   **GitHub:** [@Anubhav2321](https://github.com/Anubhav2321)
-*   **LinkedIn:** [Your LinkedIn Profile URL] *(Update this link)*
-*   **Email:** [Your Email Address] *(Update this link)*
+*   **LinkedIn:** [Your LinkedIn Profile URL](#) *(Update this link)*
+*   **Email:** [Your Email Address](#) *(Update this link)*
 
 *Feel free to reach out if you have any questions, feedback, or just want to collaborate on exciting projects!*
 
