@@ -94,7 +94,7 @@ A professional-grade financial tracking SPA focused on data visualization and pe
 
 - **Tech Stack:** React, Recharts, Node.js, Express.js, MongoDB.
 - **Key Features:** Interactive SVG charts, advanced filtering, CSV data exporting.
-- 🔗 **Links:** [📂 Source Code](./expense-tracker-pro) | [🌐 Live Demo](#)
+- 🔗 **Links:** [📂 Source Code](./expense-tracker-pro) | [🌐 Live Demo](task-pro-gold.vercel.app)
 
 ---
 
