@@ -15,6 +15,7 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
   const [page, setPage] = useState(1);
+  const [category, setCategory] = useState('All');
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,31 +23,31 @@ export default function Home() {
   // Flag to know if we are showing default movies or search results
   const [isDefaultSearch, setIsDefaultSearch] = useState(true);
 
-  // Reset page when debounced query changes
+  // Reset page when debounced query or category changes
   useEffect(() => {
     setPage(1);
-  }, [debouncedQuery]);
+  }, [debouncedQuery, category]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       // Determine what to search for
-      const searchQuery = debouncedQuery.trim() || 'Batman'; // Default to Batman if empty
-      const isDefault = !debouncedQuery.trim();
+      const searchQuery = debouncedQuery.trim(); 
+      const isDefault = !debouncedQuery.trim() && category === 'All';
       
       setIsDefaultSearch(isDefault);
       setLoading(true);
       setError('');
       
       try {
-        const data = await searchMovies(searchQuery, page);
+        const data = await searchMovies(searchQuery, page, category);
         
-        if (data.Response === 'True') {
+        if (data && data.Response === 'True') {
           setMovies(data.Search);
           setTotalResults(parseInt(data.totalResults, 10));
         } else {
           setMovies([]);
           setTotalResults(0);
-          setError(data.Error || 'No movies found.');
+          setError(data ? (data.Error || 'No movies found.') : 'No movies found.');
         }
       } catch (err) {
         setMovies([]);
@@ -58,7 +59,7 @@ export default function Home() {
     };
 
     fetchMovies();
-  }, [debouncedQuery, page]);
+  }, [debouncedQuery, page, category]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
@@ -78,8 +79,25 @@ export default function Home() {
       </section>
 
       <section id="results-section">
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem', justifyContent: 'center' }}>
+          {['All', 'Bollywood', 'Hollywood', 'Action', 'Drama', 'Sci-Fi'].map(cat => (
+            <button
+              key={cat}
+              onClick={() => setCategory(cat)}
+              className="page-btn"
+              style={{
+                background: category === cat ? 'var(--accent-color)' : '',
+                color: category === cat ? 'white' : '',
+                borderColor: category === cat ? 'var(--accent-color)' : ''
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <h2 style={{ marginBottom: '1.5rem', fontWeight: 600 }}>
-          {isDefaultSearch ? 'Popular Searches' : `Search Results for "${debouncedQuery}"`}
+          {isDefaultSearch ? 'Popular Movies' : `Results for ${debouncedQuery ? `"${debouncedQuery}"` : ''} ${category !== 'All' ? `(${category})` : ''}`}
         </h2>
 
         {loading ? (

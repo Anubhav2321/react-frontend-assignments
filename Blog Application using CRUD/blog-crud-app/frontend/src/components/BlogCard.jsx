@@ -24,7 +24,7 @@ const BlogCard = ({ blog, onDeleteClick }) => {
           <img src={blog.imageUrl} alt={blog.title} className="card-image" />
         ) : (
           <div className="card-image-placeholder">
-            <span className="placeholder-text">BlogSphere</span>
+            <span className="placeholder-text">Enterprise Insights</span>
           </div>
         )}
       </div>

@@ -1,14 +1,40 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Film, Heart } from 'lucide-react';
+import { Film, Heart, Moon, Sun } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { getFavorites } from '../utils/storage';
 
 export default function Navbar() {
   const location = useLocation();
   const [favoritesCount, setFavoritesCount] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check local storage or system preference on load
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDarkMode) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+      setIsDarkMode(false);
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      setIsDarkMode(true);
+    }
+  };
 
   // Update favorites count by listening to custom event or checking interval
-  // For a simple college project, we can check it when location changes
   useEffect(() => {
     const updateCount = () => {
       const favs = getFavorites();
@@ -23,7 +49,7 @@ export default function Navbar() {
     return () => {
       window.removeEventListener('favoritesUpdated', updateCount);
     };
-  }, [location]); // Also update when navigation changes just in case
+  }, [location]);
 
   return (
     <nav className="glass-nav">
@@ -34,6 +60,14 @@ export default function Navbar() {
         </Link>
         
         <div className="nav-links">
+          <button 
+            className="theme-toggle" 
+            onClick={toggleTheme} 
+            aria-label="Toggle Theme"
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+
           <Link 
             to="/" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}

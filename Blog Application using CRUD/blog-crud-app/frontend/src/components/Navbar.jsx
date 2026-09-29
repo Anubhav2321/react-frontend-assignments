@@ -12,7 +12,7 @@ const Navbar = ({ onSearchFocus }) => {
       <div className="container navbar-container">
         <Link to="/" className="navbar-brand">
           <BookOpen className="brand-icon" size={24} />
-          <span className="brand-text">BlogSphere</span>
+          <span className="brand-text">Enterprise Insights</span>
         </Link>
         
         <div className="navbar-links">
