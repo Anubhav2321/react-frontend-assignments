@@ -39,7 +39,7 @@ A comprehensive student information portal that displays detailed student profil
 
 - **Tech Stack:** React, Node.js, Express.js.
 - **Key Features:** Unidirectional data flow, reusable profile cards, client-side sorting logic.
-- 🔗 **Links:** [📂 Source Code](./student-management-system) | [🌐 Live Demo](#)
+- 🔗 **Links:** [📂 Source Code](./student-management-system) | [🌐 Live Demo](student-managment-kappa.vercel.app)
 
 ---
 
@@ -50,7 +50,7 @@ An interactive Employee Directory application that acts as a fully functional da
 
 - **Tech Stack:** React, useState, Event Handling, CSS.
 - **Key Features:** In-memory CRUD, live search filtering, department categorization.
-- 🔗 **Links:** [📂 Source Code](./Employee%20Directory) | [🌐 Live Demo](#)
+- 🔗 **Links:** [📂 Source Code](./Employee%20Directory) | [🌐 Live Demo](people-os-rust.vercel.app)
 
 ---
 
@@ -61,7 +61,7 @@ A dynamic weather dashboard integrating real-time meteorological data via the Op
 
 - **Tech Stack:** React, Node.js, OpenWeatherMap API, Fetch API, useEffect.
 - **Key Features:** Live city search, real-time metrics, dynamic weather icons, error handling.
-- 🔗 **Links:** [📂 Source Code](./weather-dashboard) | [🌐 Live Demo](#)
+- 🔗 **Links:** [📂 Source Code](./weather-dashboard) | [🌐 Live Demo](nexus-weather-zeta.vercel.app)
 
 ---
 
@@ -72,7 +72,7 @@ A sophisticated e-commerce cart application designed to solve "prop drilling" by
 
 - **Tech Stack:** React, Context API, useReducer, Node.js, Express.js.
 - **Key Features:** Real-time tax & total calculations, inventory limits, coupon system, slide-out drawer.
-- 🔗 **Links:** [📂 Source Code](./premium-shopping-cart) | [🌐 Live Demo](#)
+- 🔗 **Links:** [📂 Source Code](./premium-shopping-cart) | [🌐 Live Demo](luxe-aura-opal.vercel.app)
 
 ---
 
