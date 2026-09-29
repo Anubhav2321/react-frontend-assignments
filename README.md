@@ -43,6 +43,7 @@ A responsive, visually striking personal portfolio website developed using React
 **Real-World Application:**
 Provides a foundational understanding of how to build and deploy static landing pages and promotional sites—a crucial skill for freelance web developers.
 
+
 ---
 
 ### 2️⃣ Student Information Management (`student-management-system`)
