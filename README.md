@@ -83,7 +83,7 @@ A powerful Single Page Application (SPA) for task management featuring client-si
 
 - **Tech Stack:** React, React Router DOM, Context API, Node.js, Express.js, MongoDB, JWT.
 - **Key Features:** Protected routes, complete auth cycle, interactive dashboard, smart filtering.
-- 🔗 **Links:** [📂 Source Code](./nexus-task-hub) | [🌐 Live Demo](#)
+- 🔗 **Links:** [📂 Source Code](./nexus-task-hub) | [🌐 Live Demo](nexus-tasks-three.vercel.app)
 
 ---
 
