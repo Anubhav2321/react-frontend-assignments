@@ -750,6 +750,7 @@ input {
   
   .details-title {
     text-align: center;
+    font-size: 2.5rem;
   }
   
   .details-meta {
@@ -763,16 +764,275 @@ input {
   
   .info-grid {
     padding: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nav-links {
+    gap: 1.25rem;
+  }
+  
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  .movie-grid {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1.5rem;
+  .container {
+    padding: 0 1rem;
+  }
+
+  .brand span {
+    font-size: 1.25rem;
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+  
+  .favorites-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
   }
   
   .hero {
-    padding: 4rem 0 3rem;
+    padding: 3rem 0 2rem;
   }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .search-input {
+    padding: 1rem 1.2rem 1rem 3.2rem;
+    font-size: 1rem;
+    border-radius: 16px;
+  }
+  
+  /* Make categories horizontally scrollable */
+  #results-section > div:first-child {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    justify-content: flex-start !important;
+    padding-bottom: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  #results-section > div:first-child::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-btn {
+    white-space: nowrap;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem 0 3rem;
+  }
+  
+  .movie-card {
+    border-radius: 14px;
+  }
+
+  .card-content {
+    padding: 0.85rem;
+  }
+
+  .movie-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .movie-meta {
+    font-size: 0.75rem;
+  }
+
+  .fav-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .btn-surprise {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .details-poster {
+    border-radius: 16px;
+  }
+
+  .plot-section, .info-grid, .personal-notes-section {
+    padding: 1.25rem !important;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .rating-card {
+    padding: 1rem;
+  }
+  
+  .rating-value {
+    font-size: 1.4rem;
+  }
+
+  .history-carousel {
+    gap: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .history-card-wrapper {
+    flex: 0 0 130px;
+  }
+  
+  .history-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* History Carousel */
+.history-section {
+  margin-bottom: 3.5rem;
+  overflow: hidden;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.history-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clear-history-btn {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: var(--transition);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  background: var(--tag-bg);
+}
+
+.clear-history-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.history-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+}
+
+.history-carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.history-card-wrapper {
+  flex: 0 0 180px;
+  scroll-snap-align: start;
+}
+
+.history-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  height: 100%;
+}
+
+.history-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-color);
+}
+
+.history-poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.history-info {
+  padding: 0.75rem 1rem;
+}
+
+.history-title-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary);
+}
+
+/* Surprise Me Button */
+.btn-surprise {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  background: var(--tag-bg);
+  border: 1px solid var(--accent-color);
+  border-radius: 9999px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+  cursor: pointer;
+}
+
+.btn-surprise:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: var(--accent-color);
+  color: white;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn-surprise:active {
+  transform: translateY(0) scale(0.98);
 }

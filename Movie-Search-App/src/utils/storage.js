@@ -47,3 +47,75 @@ export const isFavorite = (imdbID) => {
   const favorites = getFavorites();
   return favorites.some(movie => movie.imdbID === imdbID);
 };
+
+const HISTORY_KEY = 'cineglass_history';
+
+export const getHistory = () => {
+  try {
+    const history = localStorage.getItem(HISTORY_KEY);
+    return history ? JSON.parse(history) : [];
+  } catch (error) {
+    console.error('Error getting history from local storage:', error);
+    return [];
+  }
+};
+
+export const saveHistory = (history) => {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  } catch (error) {
+    console.error('Error saving history to local storage:', error);
+  }
+};
+
+export const addToHistory = (movie) => {
+  let history = getHistory();
+  // Remove if already exists so we can move it to the front
+  history = history.filter(h => h.imdbID !== movie.imdbID);
+  
+  const movieToSave = {
+    imdbID: movie.imdbID,
+    Title: movie.Title,
+    Year: movie.Year,
+    Poster: movie.Poster,
+    Type: movie.Type
+  };
+  
+  // Add to beginning of array
+  history.unshift(movieToSave);
+  
+  // Keep only the latest 15 movies
+  if (history.length > 15) {
+    history = history.slice(0, 15);
+  }
+  
+  saveHistory(history);
+  return history;
+};
+
+export const clearHistory = () => {
+  saveHistory([]);
+};
+
+const NOTES_KEY = 'cineglass_notes';
+
+export const getMovieNote = (imdbID) => {
+  try {
+    const notes = localStorage.getItem(NOTES_KEY);
+    const parsed = notes ? JSON.parse(notes) : {};
+    return parsed[imdbID] || { rating: 0, text: '' };
+  } catch (error) {
+    return { rating: 0, text: '' };
+  }
+};
+
+export const saveMovieNote = (imdbID, noteData) => {
+  try {
+    const notes = localStorage.getItem(NOTES_KEY);
+    const parsed = notes ? JSON.parse(notes) : {};
+    parsed[imdbID] = noteData;
+    localStorage.setItem(NOTES_KEY, JSON.stringify(parsed));
+  } catch (error) {
+    console.error('Error saving note:', error);
+  }
+};

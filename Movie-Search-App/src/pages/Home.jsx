@@ -1,32 +1,60 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams, Link, useNavigate } from 'react-router-dom';
+import { History, Trash2, Wand2 } from 'lucide-react';
 import SearchBar from '../components/SearchBar';
 import MovieCard from '../components/MovieCard';
 import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
 import EmptyState from '../components/EmptyState';
-import { searchMovies } from '../api';
+import { getHistory, clearHistory } from '../utils/storage';
+import { searchMovies, getRandomMovieId } from '../api';
 import { useDebounce } from '../hooks/useDebounce';
 
 export default function Home() {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  
+  const initialQuery = searchParams.get('query') || '';
+  const initialPage = parseInt(searchParams.get('page')) || 1;
+  const initialCategory = searchParams.get('category') || 'All';
+
+  const [query, setQuery] = useState(initialQuery);
   // Use debounced query for API calls to prevent sending request on every keystroke
   const debouncedQuery = useDebounce(query, 500);
   
   const [movies, setMovies] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  const [page, setPage] = useState(1);
-  const [category, setCategory] = useState('All');
+  const [page, setPage] = useState(initialPage);
+  const [category, setCategory] = useState(initialCategory);
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
   // Flag to know if we are showing default movies or search results
   const [isDefaultSearch, setIsDefaultSearch] = useState(true);
+  const [history, setHistory] = useState([]);
 
-  // Reset page when debounced query or category changes
+  // Load history on mount
   useEffect(() => {
-    setPage(1);
-  }, [debouncedQuery, category]);
+    setHistory(getHistory());
+  }, []);
+
+  const handleClearHistory = () => {
+    clearHistory();
+    setHistory([]);
+  };
+
+  // Remove isFirstRender and useEffect as they cause issues in Strict Mode
+
+  // Sync state to URL
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (debouncedQuery) params.set('query', debouncedQuery);
+    if (page > 1) params.set('page', page.toString());
+    if (category !== 'All') params.set('category', category);
+    
+    setSearchParams(params, { replace: true });
+  }, [debouncedQuery, page, category, setSearchParams]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -75,15 +103,68 @@ export default function Home() {
       <section className="hero">
         <h1>Discover Your Next Favorite Movie</h1>
         <p>Search thousands of movies, series, and episodes to explore ratings, posters, and details.</p>
-        <SearchBar query={query} setQuery={setQuery} />
+        <SearchBar 
+          query={query} 
+          setQuery={(newQuery) => {
+            setQuery(newQuery);
+            setPage(1);
+          }} 
+        />
+        <div style={{ marginTop: '1.5rem' }}>
+          <button 
+            className="btn-surprise glass-panel"
+            onClick={() => {
+              const randomId = getRandomMovieId();
+              navigate(`/movie/${randomId}`);
+            }}
+          >
+            <Wand2 size={18} />
+            <span>Surprise Me</span>
+          </button>
+        </div>
       </section>
+
+      {history.length > 0 && isDefaultSearch && (
+        <section className="history-section">
+          <div className="history-header">
+            <h2 className="history-title">
+              <History size={24} color="var(--accent-color)" />
+              Recently Viewed
+            </h2>
+            <button className="clear-history-btn" onClick={handleClearHistory} title="Clear history">
+              <Trash2 size={16} style={{ display: 'inline', marginBottom: '-3px' }} /> Clear
+            </button>
+          </div>
+          <div className="history-carousel">
+            {history.map(movie => (
+              <div key={movie.imdbID} className="history-card-wrapper">
+                <Link to={`/movie/${movie.imdbID}`} className="history-card">
+                  {movie.Poster && movie.Poster !== 'N/A' ? (
+                    <img src={movie.Poster} alt={movie.Title} className="history-poster" loading="lazy" />
+                  ) : (
+                    <div className="history-poster no-poster">
+                      <span>🎬</span>
+                    </div>
+                  )}
+                  <div className="history-info">
+                    <div className="history-title-text" title={movie.Title}>{movie.Title}</div>
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section id="results-section">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem', justifyContent: 'center' }}>
           {['All', 'Bollywood', 'Hollywood', 'Action', 'Drama', 'Sci-Fi'].map(cat => (
             <button
               key={cat}
-              onClick={() => setCategory(cat)}
+              onClick={() => {
+                setCategory(cat);
+                setPage(1);
+              }}
               className="page-btn"
               style={{
                 background: category === cat ? 'var(--accent-color)' : '',

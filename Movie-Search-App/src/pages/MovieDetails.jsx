@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Heart, Clock, Calendar } from 'lucide-react';
+import { ArrowLeft, Heart, Clock, Calendar, Star, Edit3, Save } from 'lucide-react';
 import { getMovieDetails } from '../api';
-import { isFavorite, addFavorite, removeFavorite } from '../utils/storage';
+import { isFavorite, addFavorite, removeFavorite, addToHistory, getMovieNote, saveMovieNote } from '../utils/storage';
 import Loading from '../components/Loading';
 
 export default function MovieDetails() {
@@ -13,6 +13,11 @@ export default function MovieDetails() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [favorite, setFavorite] = useState(false);
+  
+  // Notes and Rating State
+  const [personalNote, setPersonalNote] = useState('');
+  const [personalRating, setPersonalRating] = useState(0);
+  const [isEditingNote, setIsEditingNote] = useState(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -25,6 +30,14 @@ export default function MovieDetails() {
         if (data.Response === 'True') {
           setMovie(data);
           setFavorite(isFavorite(data.imdbID));
+          
+          // Load personal note and rating
+          const savedNote = getMovieNote(data.imdbID);
+          setPersonalNote(savedNote.text);
+          setPersonalRating(savedNote.rating);
+          
+          // Add to recently viewed
+          addToHistory(data);
         } else {
           setError(data.Error || 'Movie not found.');
         }
@@ -58,6 +71,16 @@ export default function MovieDetails() {
     
     // Dispatch event to update navbar badge
     window.dispatchEvent(new Event('favoritesUpdated'));
+  };
+
+  const handleSaveNote = () => {
+    saveMovieNote(movie.imdbID, { rating: personalRating, text: personalNote });
+    setIsEditingNote(false);
+  };
+
+  const handleRating = (rating) => {
+    setPersonalRating(rating);
+    saveMovieNote(movie.imdbID, { rating, text: personalNote });
   };
 
   if (loading) {
@@ -137,6 +160,42 @@ export default function MovieDetails() {
           <div className="plot-section">
             <h3>Plot Summary</h3>
             <p className="plot-text">{movie.Plot !== 'N/A' ? movie.Plot : 'No plot available for this movie.'}</p>
+          </div>
+
+          <div className="personal-notes-section glass-panel" style={{ padding: '2rem', marginBottom: '3rem', borderRadius: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)' }}>My Personal Review</h3>
+              {!isEditingNote ? (
+                <button onClick={() => setIsEditingNote(true)} style={{ color: 'var(--accent-color)', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
+                  <Edit3 size={18} /> Edit
+                </button>
+              ) : (
+                <button onClick={handleSaveNote} style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 600 }}>
+                  <Save size={18} /> Save
+                </button>
+              )}
+            </div>
+            
+            <div style={{ marginBottom: '1rem', display: 'flex', gap: '0.2rem' }}>
+              {[1, 2, 3, 4, 5].map(star => (
+                <button key={star} onClick={() => handleRating(star)} style={{ color: star <= personalRating ? '#fbbf24' : 'var(--icon-color)', transition: 'transform 0.2s', cursor: 'pointer' }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.2)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                  <Star size={24} fill={star <= personalRating ? '#fbbf24' : 'none'} />
+                </button>
+              ))}
+            </div>
+
+            {isEditingNote ? (
+              <textarea 
+                value={personalNote}
+                onChange={(e) => setPersonalNote(e.target.value)}
+                placeholder="Write your private thoughts or review here..."
+                style={{ width: '100%', minHeight: '100px', padding: '1rem', borderRadius: '12px', border: '1px solid var(--input-border)', background: 'var(--input-bg)', color: 'var(--text-primary)', fontFamily: 'inherit', resize: 'vertical' }}
+              />
+            ) : (
+              <p style={{ color: personalNote ? 'var(--text-primary)' : 'var(--text-secondary)', fontStyle: personalNote ? 'normal' : 'italic', whiteSpace: 'pre-wrap' }}>
+                {personalNote || "You haven't added a review for this movie yet."}
+              </p>
+            )}
           </div>
 
           <div className="ratings-grid">

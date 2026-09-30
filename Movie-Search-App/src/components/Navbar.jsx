@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Film, Heart, Moon, Sun } from 'lucide-react';
+import { Film, Heart, Moon, Sun, Home } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { getFavorites } from '../utils/storage';
 
@@ -72,14 +72,15 @@ export default function Navbar() {
             to="/" 
             className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
           >
-            Home
+            <Home size={18} />
+            <span className="nav-text">Home</span>
           </Link>
           <Link 
             to="/favorites" 
             className={`nav-link ${location.pathname === '/favorites' ? 'active' : ''}`}
           >
             <Heart size={18} />
-            <span>Favorites</span>
+            <span className="nav-text">Favorites</span>
             {favoritesCount > 0 && (
               <span className="favorites-badge">{favoritesCount}</span>
             )}
