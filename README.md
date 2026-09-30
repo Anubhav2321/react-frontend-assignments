@@ -50,7 +50,7 @@ An interactive Employee Directory application that acts as a fully functional da
 
 - **Tech Stack:** React, useState, Event Handling, CSS.
 - **Key Features:** In-memory CRUD, live search filtering, department categorization.
-- 🔗 **Links:** [📂 Source Code](./Employee%20Directory) | [🌐 Live Demo](people-os-rust.vercel.app)
+- 🔗 **Links:** [📂 Source Code](./Employee%20Directory) | [🌐 Live Demo](https://people-os-rust.vercel.app/)
 
 ---
 
@@ -61,7 +61,7 @@ A dynamic weather dashboard integrating real-time meteorological data via the Op
 
 - **Tech Stack:** React, Node.js, OpenWeatherMap API, Fetch API, useEffect.
 - **Key Features:** Live city search, real-time metrics, dynamic weather icons, error handling.
-- 🔗 **Links:** [📂 Source Code](./weather-dashboard) | [🌐 Live Demo](nexus-weather-zeta.vercel.app)
+- 🔗 **Links:** [📂 Source Code](./weather-dashboard) | [🌐 Live Demo](https://nexus-weather-zeta.vercel.app/)
 
 ---
 
@@ -72,7 +72,7 @@ A sophisticated e-commerce cart application designed to solve "prop drilling" by
 
 - **Tech Stack:** React, Context API, useReducer, Node.js, Express.js.
 - **Key Features:** Real-time tax & total calculations, inventory limits, coupon system, slide-out drawer.
-- 🔗 **Links:** [📂 Source Code](./premium-shopping-cart) | [🌐 Live Demo](luxe-aura-opal.vercel.app)
+- 🔗 **Links:** [📂 Source Code](./premium-shopping-cart) | [🌐 Live Demo](https://luxe-aura-opal.vercel.app/)
 
 ---
 
@@ -83,7 +83,7 @@ A powerful Single Page Application (SPA) for task management featuring client-si
 
 - **Tech Stack:** React, React Router DOM, Context API, Node.js, Express.js, MongoDB, JWT.
 - **Key Features:** Protected routes, complete auth cycle, interactive dashboard, smart filtering.
-- 🔗 **Links:** [📂 Source Code](./nexus-task-hub) | [🌐 Live Demo](nexus-tasks-three.vercel.app)
+- 🔗 **Links:** [📂 Source Code](./nexus-task-hub) | [🌐 Live Demo](https://task-pro-gold.vercel.app/dashboard)
 
 ---
 
@@ -94,7 +94,7 @@ A professional-grade financial tracking SPA focused on data visualization and pe
 
 - **Tech Stack:** React, Recharts, Node.js, Express.js, MongoDB.
 - **Key Features:** Interactive SVG charts, advanced filtering, CSV data exporting.
-- 🔗 **Links:** [📂 Source Code](./expense-tracker-pro) | [🌐 Live Demo](task-pro-gold.vercel.app)
+- 🔗 **Links:** [📂 Source Code](./expense-tracker-pro) | [🌐 Live Demo](https://nexus-tasks-three.vercel.app/login)
 
 ---
 
