@@ -39,7 +39,7 @@ A comprehensive student information portal that displays detailed student profil
 
 - **Tech Stack:** React, Node.js, Express.js.
 - **Key Features:** Unidirectional data flow, reusable profile cards, client-side sorting logic.
-- 🔗 **Links:** [📂 Source Code](./student-management-system) | [🌐 Live Demo](student-managment-kappa.vercel.app)
+- 🔗 **Links:** [📂 Source Code](./student-management-system) | [🌐 Live Demo](https://student-managment-kappa.vercel.app/)
 
 ---
 
