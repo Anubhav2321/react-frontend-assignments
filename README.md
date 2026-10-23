@@ -223,3 +223,4 @@ Passion-driven Frontend Developer focusing on React and modern web architectures
 <div align="center">
   <p>Built with ❤️ and React.</p>
 </div>
+Practicing GitHub Pull Requests.
