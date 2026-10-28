@@ -131,6 +131,28 @@ A comprehensive task management application featuring a dedicated frontend and b
 
 ---
 
+### 🔟 EduTrack (`EduTrack`)
+
+**Project Overview:**
+A modern Student Attendance and Academic Tracking application built with Redux Toolkit and Vite. Features comprehensive attendance records, subject management, dynamic filters, visual analytics, and CSV report export.
+
+- **Tech Stack:** React, Redux Toolkit, Vite, Lucide Icons.
+- **Key Features:** Centralized Redux state, attendance calculation, subject filtering, report generation, CSV export.
+- 🔗 **Links:** [📂 Source Code](./EduTrack) | [🌐 Live Demo](#)
+
+---
+
+### 1️⃣1️⃣ Redux E-Commerce Platform (`redux-ecommerce`)
+
+**Project Overview:**
+A full-stack e-commerce web application featuring a Node.js/Express REST API backend and a responsive React/Redux Toolkit frontend with complete shopping, cart management, and checkout flows.
+
+- **Tech Stack:** React, Redux Toolkit, Node.js, Express, Vite, CSS Modules.
+- **Key Features:** User authentication, catalog search/filter, persistent shopping cart, checkout flow, order management.
+- 🔗 **Links:** [📂 Source Code](./redux-ecommerce) | [🌐 Live Demo](#)
+
+---
+
 ## 🛠️ Technology Stack
 
 | Category | Technologies |
@@ -157,6 +179,8 @@ A comprehensive task management application featuring a dedicated frontend and b
  ┣ 📂 premium-shopping-cart       # Context API & useReducer
  ┣ 📂 student-management-system   # Props & Reusable Components
  ┣ 📂 task-manager-pro            # Advanced Task Management (Frontend/Backend)
+ ┣ 📂 EduTrack                    # Student Attendance & Academic Tracker (Redux Toolkit)
+ ┣ 📂 redux-ecommerce             # Full-Stack E-Commerce Platform (React, Redux, Express)
  ┣ 📂 weather-dashboard           # API Integration & Async/Await
  ┗ 📜 README.md                   # Project Documentation
 ```
